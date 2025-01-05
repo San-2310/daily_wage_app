@@ -6,7 +6,10 @@ import 'package:daily_wage_app/pages/employer_job_listings/employer_job_details.
 import 'package:daily_wage_app/providers/application_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localization/flutter_localization.dart'; // Add this import
 import 'package:provider/provider.dart';
+
+import '../../localization/locales.dart'; // Add this import
 
 class EmployerJobListScreen extends StatelessWidget {
   const EmployerJobListScreen({super.key});
@@ -16,14 +19,14 @@ class EmployerJobListScreen extends StatelessWidget {
     // Get the current authenticated user ID
     User? user = FirebaseAuth.instance.currentUser;
     if (user == null) {
-      return const Center(child: Text('No user is signed in'));
+      return Center(child: Text(LocaleData.noUserSignedIn.getString(context))); // Update this line
     }
 
     String employerId = user.uid;
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Your Job Listings'),
+        title: Text(LocaleData.yourJobListings.getString(context)), // Update this line
         actions: [
           IconButton(
             icon: const Icon(Icons.add),
@@ -125,7 +128,7 @@ class EmployerJobListScreen extends StatelessWidget {
                                       ),
                                       const SizedBox(height: 10),
                                       Text(
-                                        'Wage: ₹${job.wagePerDay} /day',
+                                        '${LocaleData.wage.getString(context)}: ₹${job.wagePerDay} /${LocaleData.day.getString(context)}', // Update this line
                                         style: const TextStyle(
                                           fontSize: 16,
                                           fontWeight: FontWeight.bold,
@@ -134,7 +137,7 @@ class EmployerJobListScreen extends StatelessWidget {
                                       ),
                                       const SizedBox(height: 5),
                                       Text(
-                                        'Status: ${job.status}',
+                                        '${LocaleData.status.getString(context)}: ${job.status}', // Update this line
                                         style: const TextStyle(
                                           fontSize: 14,
                                           color: Colors.white70,
@@ -155,7 +158,7 @@ class EmployerJobListScreen extends StatelessWidget {
                                         color: Colors.white,
                                       ),
                                       child: Text(
-                                        '$applicationsCount Applications',
+                                        '${applicationsCount} ${LocaleData.applications.getString(context)}', // Update this line
                                         style: const TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 14,

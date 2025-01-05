@@ -5,6 +5,9 @@ import 'package:daily_wage_app/services/notification_service.dart'; // Import th
 import 'package:daily_wage_app/services/rating_services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localization/flutter_localization.dart'; // Add this import
+
+import '../localization/locales.dart'; // Add this import
 
 class ApplicationTab extends StatefulWidget {
   @override
@@ -26,8 +29,8 @@ class _ApplicationTabState extends State<ApplicationTab> {
     final currentUser = _auth.currentUser;
 
     if (currentUser == null) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text('User not logged in')));
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(LocaleData.noUserSignedIn.getString(context)))); // Update this line
       return;
     }
 
@@ -43,11 +46,11 @@ class _ApplicationTabState extends State<ApplicationTab> {
     String? error = await _ratingServices.addOrUpdateRating(ratingObj);
     if (error == null) {
       setState(() {});
-      ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Rating submitted successfully')));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(LocaleData.ratingSubmittedSuccessfully.getString(context)))); // Update this line
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error submitting rating: $error')));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text('${LocaleData.errorSubmittingRating.getString(context)} $error'))); // Update this line
     }
   }
 
@@ -59,7 +62,7 @@ class _ApplicationTabState extends State<ApplicationTab> {
         return StatefulBuilder(
           builder: (BuildContext context, setDialogState) {
             return AlertDialog(
-              title: Text('Rate Worker'),
+              title: Text(LocaleData.rateEmployer.getString(context)), // Update this line
               content: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -86,7 +89,7 @@ class _ApplicationTabState extends State<ApplicationTab> {
                       );
                     }),
                   ),
-                  Text('Rating: $selectedRating'),
+                  Text('${LocaleData.rating.getString(context)}: $selectedRating'), // Update this line
                 ],
               ),
               actions: <Widget>[
@@ -94,14 +97,14 @@ class _ApplicationTabState extends State<ApplicationTab> {
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  child: Text('Cancel'),
+                  child: Text(LocaleData.cancel.getString(context)), // Update this line
                 ),
                 TextButton(
                   onPressed: () {
                     Navigator.of(context).pop();
                     _submitRating(workerId, selectedRating, applicationId);
                   },
-                  child: Text('Submit'),
+                  child: Text(LocaleData.submit.getString(context)), // Update this line
                 ),
               ],
             );
@@ -145,7 +148,7 @@ class _ApplicationTabState extends State<ApplicationTab> {
       ));
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text('Error updating application status: $e'),
+        content: Text('${LocaleData.errorUpdatingJob.getString(context)} $e'), // Update this line
       ));
     }
   }
@@ -163,11 +166,11 @@ class _ApplicationTabState extends State<ApplicationTab> {
         }
 
         if (snapshot.hasError) {
-          return Center(child: Text('Error: ${snapshot.error}'));
+          return Center(child: Text('${LocaleData.error.getString(context)}: ${snapshot.error}')); // Update this line
         }
 
         if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-          return Center(child: Text('No applications found.'));
+          return Center(child: Text(LocaleData.noApplicationsYet.getString(context))); // Update this line
         }
 
         List<Map<String, dynamic>> applications = [];
@@ -206,11 +209,11 @@ class _ApplicationTabState extends State<ApplicationTab> {
             }
 
             if (futureSnapshot.hasError) {
-              return Center(child: Text('Error: ${futureSnapshot.error}'));
+              return Center(child: Text('${LocaleData.error.getString(context)}: ${futureSnapshot.error}')); // Update this line
             }
 
             if (!futureSnapshot.hasData || futureSnapshot.data!.isEmpty) {
-              return Center(child: Text('No applications found.'));
+              return Center(child: Text(LocaleData.noApplicationsYet.getString(context))); // Update this line
             }
 
             List<Map<String, dynamic>> applicationsWithWorkerNames =
@@ -234,20 +237,17 @@ class _ApplicationTabState extends State<ApplicationTab> {
                       context: context,
                       builder: (BuildContext context) {
                         return AlertDialog(
-                          title: Text('Worker Details'),
+                          title: Text(LocaleData.workerDetails.getString(context)), // Update this line
                           content: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              _buildDetailRow('Name', workerData['name']),
-                              _buildDetailRow('Email', workerData['email']),
-                              _buildDetailRow('Phone', workerData['phone']),
-                              _buildDetailRow('Role', workerData['role']),
-                              _buildDetailRow(
-                                  'Location', workerData['location']),
-                              _buildDetailRow('Number of Ratings',
-                                  workerData['ratingCount'].toString()),
-                              _buildDetailRow('Average Rating',
-                                  workerData['averageRating'].toString()),
+                              _buildDetailRow(LocaleData.name.getString(context), workerData['name']), // Update this line
+                              _buildDetailRow(LocaleData.email.getString(context), workerData['email']), // Update this line
+                              _buildDetailRow(LocaleData.phone.getString(context), workerData['phone']), // Update this line
+                              _buildDetailRow(LocaleData.role.getString(context), workerData['role']), // Update this line
+                              _buildDetailRow(LocaleData.location.getString(context), workerData['location']), // Update this line
+                              _buildDetailRow(LocaleData.numRatings.getString(context), workerData['ratingCount'].toString()), // Update this line
+                              _buildDetailRow(LocaleData.avgRating.getString(context), workerData['averageRating'].toString()), // Update this line
                             ],
                           ),
                           actions: <Widget>[
@@ -255,7 +255,7 @@ class _ApplicationTabState extends State<ApplicationTab> {
                               onPressed: () {
                                 Navigator.of(context).pop();
                               },
-                              child: Text('Close'),
+                              child: Text(LocaleData.close.getString(context)), // Update this line
                             ),
                           ],
                         );
@@ -284,8 +284,8 @@ class _ApplicationTabState extends State<ApplicationTab> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(application['workerName'] ??
-                                  'Unknown Worker'),
-                              Text('Status: ${application['status']}'),
+                                  LocaleData.unknownWorker.getString(context)), // Update this line
+                              Text('${LocaleData.status.getString(context)}: ${application['status']}'), // Update this line
                             ],
                           ),
                         ),
@@ -381,9 +381,9 @@ class _ApplicationTabState extends State<ApplicationTab> {
             ),
             child: TabBar(
               tabs: [
-                Tab(text: 'Applied'),
-                Tab(text: 'Accepted'),
-                Tab(text: 'Rejected'),
+                Tab(text: LocaleData.applied.getString(context)), // Update this line
+                Tab(text: LocaleData.accepted.getString(context)), // Update this line
+                Tab(text: LocaleData.rejected.getString(context)), // Update this line
               ],
             ),
           ),

@@ -2,7 +2,9 @@ import 'package:daily_wage_app/pages/auth/signup_screen.dart';
 import 'package:daily_wage_app/pages/navigator_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-// Import your home screen or the page you want to navigate after login
+import 'package:flutter_localization/flutter_localization.dart'; // Add this import
+
+import '../../localization/locales.dart'; // Add this import
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -95,7 +97,7 @@ class _LoginScreenState extends State<LoginScreen> {
               children: [
                 const SizedBox(height: 60),
                 Text(
-                  'Log In',
+                  LocaleData.logIn.getString(context), // Update this line
                   style: theme.textTheme.headlineMedium?.copyWith(fontSize: 35),
                 ),
                 const SizedBox(height: 60),
@@ -112,7 +114,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       children: [
                         const SizedBox(height: 30),
                         Text(
-                          "Email",
+                          LocaleData.email.getString(context), // Update this line
                           style: theme.textTheme.bodyLarge?.copyWith(
                             fontWeight: FontWeight.bold,
                           ),
@@ -122,7 +124,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           controller: _emailController,
                           keyboardType: TextInputType.emailAddress,
                           decoration: InputDecoration(
-                            hintText: 'Enter your email',
+                            hintText: LocaleData.enterEmail.getString(context), // Update this line
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
                             ),
@@ -130,7 +132,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         const SizedBox(height: 24),
                         Text(
-                          "Password",
+                          LocaleData.password.getString(context), // Update this line
                           style: theme.textTheme.bodyLarge?.copyWith(
                             fontWeight: FontWeight.bold,
                           ),
@@ -140,7 +142,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           controller: _passwordController,
                           obscureText: true,
                           decoration: InputDecoration(
-                            hintText: 'Enter your password',
+                            hintText: LocaleData.enterPassword.getString(context), // Update this line
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
                             ),
@@ -164,7 +166,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     ),
                                   )
                                 : Text(
-                                    'Log In',
+                                    LocaleData.logIn.getString(context), // Update this line
                                     style: theme.textTheme.bodyLarge?.copyWith(
                                       color: theme.colorScheme.onPrimary,
                                     ),
@@ -180,7 +182,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "OR",
+                      LocaleData.or.getString(context), // Update this line
                       style: theme.textTheme.bodyLarge?.copyWith(fontSize: 20),
                     ),
                   ],
@@ -190,7 +192,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "Don't have an account?",
+                      LocaleData.alreadyHaveAccount.getString(context), // Update this line
                       style: theme.textTheme.bodyMedium,
                     ),
                     GestureDetector(
@@ -201,7 +203,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         );
                       },
                       child: Text(
-                        " Sign Up",
+                        LocaleData.signUp.getString(context), // Update this line
                         style: theme.textTheme.bodyMedium?.copyWith(
                           fontWeight: FontWeight.bold,
                           color: theme.colorScheme.primary,

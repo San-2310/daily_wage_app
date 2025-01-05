@@ -1,10 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:daily_wage_app/localization/locales.dart';
 import 'package:daily_wage_app/pages/notification_screen/notification_screen.dart';
 import 'package:daily_wage_app/pages/worker_job_screen/worker_job_details_screen.dart';
 import 'package:daily_wage_app/pages/worker_job_screen/worker_job_listings_screen.dart';
 import 'package:daily_wage_app/widgets/all_job_fliter.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localization/flutter_localization.dart';
 
 class WorkerHomeScreen extends StatefulWidget {
   const WorkerHomeScreen({super.key});
@@ -64,7 +66,7 @@ class _WorkerHomeScreenState extends State<WorkerHomeScreen> {
           ),
         ),
         title: Text(
-          'Daily Wage App',
+          LocaleData.title.getString(context),
           style: TextStyle(
             fontWeight: FontWeight.bold,
             color: Theme.of(context).colorScheme.primary,
@@ -91,26 +93,34 @@ class _WorkerHomeScreenState extends State<WorkerHomeScreen> {
             children: [
               Row(
                 children: [
-                  Text(
-                    'Hey, $_userName!',
-                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: Theme.of(context).colorScheme.onSecondary,
-                          fontSize: 12,
-                        ),
+                  Expanded(
+                    child: Text(
+                      context.formatString(LocaleData.hey, [_userName]),
+                      style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(context).colorScheme.onSecondary,
+                            fontSize: 12,
+                          ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
                 ],
               ),
               SizedBox(height: 8),
               Row(
                 children: [
-                  Text(
-                    "Empower Work. Simplify Life.",
-                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: Theme.of(context).colorScheme.onSurface,
-                          fontSize: 24,
-                        ),
+                  Expanded(
+                    child: Text(
+                      LocaleData.empowerWork.getString(context),
+                      style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(context).colorScheme.onSurface,
+                            fontSize: 24,
+                          ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
                 ],
               ),
@@ -118,13 +128,17 @@ class _WorkerHomeScreenState extends State<WorkerHomeScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    "Your Applications.",
-                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: Theme.of(context).colorScheme.onSurface,
-                          fontSize: 20,
-                        ),
+                  Expanded(
+                    child: Text(
+                      LocaleData.yourApplications.getString(context),
+                      style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(context).colorScheme.onSurface,
+                            fontSize: 20,
+                          ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(0, 4, 8, 0),
@@ -140,7 +154,7 @@ class _WorkerHomeScreenState extends State<WorkerHomeScreen> {
                       child: Row(
                         children: [
                           Text(
-                            "View All",
+                            LocaleData.viewAll.getString(context),
                             style: TextStyle(
                               color: Theme.of(context).colorScheme.onSecondary,
                               fontSize: 12,
@@ -219,7 +233,7 @@ class _WorkerHomeScreenState extends State<WorkerHomeScreen> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                'No Applications Yet,',
+                                LocaleData.noApplicationsYet.getString(context),
                                 style: TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold,
@@ -228,7 +242,7 @@ class _WorkerHomeScreenState extends State<WorkerHomeScreen> {
                                 ),
                               ),
                               Text(
-                                'Start applying now!',
+                                LocaleData.startApplyingNow.getString(context),
                                 style: TextStyle(
                                   fontSize: 14,
                                   color:
@@ -331,7 +345,7 @@ class _WorkerHomeScreenState extends State<WorkerHomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "All Job Listings",
+                    LocaleData.allJobListings.getString(context),
                     style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                           fontWeight: FontWeight.bold,
                           color: Theme.of(context).colorScheme.onSurface,
@@ -343,13 +357,17 @@ class _WorkerHomeScreenState extends State<WorkerHomeScreen> {
               SizedBox(height: 16),
               Row(
                 children: [
-                  Text(
-                    'Sort By',
-                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: Theme.of(context).colorScheme.onSecondary,
-                          fontSize: 12,
-                        ),
+                  Expanded(
+                    child: Text(
+                      LocaleData.sortBy.getString(context),
+                      style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(context).colorScheme.onSecondary,
+                            fontSize: 12,
+                          ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
                 ],
               ),

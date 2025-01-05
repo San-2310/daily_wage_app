@@ -7,6 +7,9 @@ import 'package:daily_wage_app/pages/worker_home_screen/worker_home_screen.dart'
 import 'package:daily_wage_app/pages/worker_job_screen/worker_job_listings_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localization/flutter_localization.dart'; // Add this import
+
+import '../localization/locales.dart'; // Add this import
 
 class NavigatorScreen extends StatefulWidget {
   @override
@@ -105,22 +108,22 @@ class _NavigatorScreenState extends State<NavigatorScreen> {
             unselectedItemColor: const Color.fromRGBO(55, 27, 52, 1),
             currentIndex: _selectedIndex,
             onTap: _onItemTapped,
-            items: const [
+            items: [
               BottomNavigationBarItem(
                 icon: Icon(Icons.home),
-                label: 'Home',
+                label: LocaleData.home.getString(context), // Update this line
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.medical_services_outlined),
-                label: 'Jobs',
+                label: LocaleData.jobs.getString(context), // Update this line
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.person),
-                label: 'Profile',
+                label: LocaleData.profile.getString(context), // Update this line
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.settings),
-                label: 'Settings',
+                label: LocaleData.settings.getString(context), // Update this line
               ),
             ],
           ),

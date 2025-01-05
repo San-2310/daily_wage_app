@@ -6,6 +6,9 @@ import 'package:daily_wage_app/services/notification_service.dart';
 import 'package:daily_wage_app/services/rating_services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localization/flutter_localization.dart'; // Add this import
+
+import '../../localization/locales.dart'; // Add this import
 
 class WorkerJobDetailsScreen extends StatefulWidget {
   final String jobId;
@@ -57,7 +60,7 @@ class _WorkerJobDetailsScreenState extends State<WorkerJobDetailsScreen> {
       }
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error fetching worker data: $e')),
+        SnackBar(content: Text('${LocaleData.errorFetchingWorkerData.getString(context)} $e')), // Update this line
       );
     }
   }
@@ -81,7 +84,7 @@ class _WorkerJobDetailsScreenState extends State<WorkerJobDetailsScreen> {
       }
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error fetching job details: $e')),
+        SnackBar(content: Text('${LocaleData.errorFetchingJobDetails.getString(context)} $e')), // Update this line
       );
     }
   }
@@ -108,10 +111,10 @@ class _WorkerJobDetailsScreenState extends State<WorkerJobDetailsScreen> {
     if (error == null) {
       setState(() {});
       ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Rating submitted successfully')));
+          SnackBar(content: Text('${LocaleData.ratingSubmittedSuccessfully.getString(context)}'))); // Update this line
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error submitting rating: $error')));
+          SnackBar(content: Text('${LocaleData.errorSubmittingRating.getString(context)} $error'))); // Update this line
     }
   }
 
@@ -123,7 +126,7 @@ class _WorkerJobDetailsScreenState extends State<WorkerJobDetailsScreen> {
         return StatefulBuilder(
           builder: (BuildContext context, setDialogState) {
             return AlertDialog(
-              title: Text('Rate Employer'),
+              title: Text(LocaleData.rateEmployer.getString(context)), // Update this line
               content: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -150,7 +153,7 @@ class _WorkerJobDetailsScreenState extends State<WorkerJobDetailsScreen> {
                       );
                     }),
                   ),
-                  Text('Rating: $selectedRating'),
+                  Text('${LocaleData.rating.getString(context)}: $selectedRating'), // Update this line
                 ],
               ),
               actions: <Widget>[
@@ -158,14 +161,14 @@ class _WorkerJobDetailsScreenState extends State<WorkerJobDetailsScreen> {
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  child: Text('Cancel'),
+                  child: Text(LocaleData.cancel.getString(context)), // Update this line
                 ),
                 TextButton(
                   onPressed: () {
                     Navigator.of(context).pop();
                     _submitRating(_jobDetails!['employerId']);
                   },
-                  child: Text('Submit'),
+                  child: Text(LocaleData.submit.getString(context)), // Update this line
                 ),
               ],
             );
@@ -198,7 +201,7 @@ class _WorkerJobDetailsScreenState extends State<WorkerJobDetailsScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Job Details'),
+        title: Text(LocaleData.jobDetails.getString(context)), // Update this line
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
@@ -206,7 +209,7 @@ class _WorkerJobDetailsScreenState extends State<WorkerJobDetailsScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              _jobDetails!['jobTitle'] ?? 'Job Title',
+              _jobDetails!['jobTitle'] ?? LocaleData.jobTitle.getString(context), // Update this line
               style: theme.textTheme.headlineSmall,
             ),
             const SizedBox(height: 10),
@@ -230,12 +233,12 @@ class _WorkerJobDetailsScreenState extends State<WorkerJobDetailsScreen> {
                 return Row(
                   children: [
                     Text(
-                      'Employer Rating: ${employerRating.toStringAsFixed(1)}',
+                      '${LocaleData.employerRating.getString(context)}: ${employerRating.toStringAsFixed(1)}', // Update this line
                       style: theme.textTheme.titleMedium,
                     ),
                     const SizedBox(width: 10),
                     Text(
-                      '($ratingCount reviews)',
+                      '($ratingCount ${LocaleData.reviews.getString(context)})', // Update this line
                       style: const TextStyle(color: Colors.grey),
                     ),
                   ],
@@ -247,20 +250,20 @@ class _WorkerJobDetailsScreenState extends State<WorkerJobDetailsScreen> {
 
             // Job Details
             _buildDetailsSection(
-              'Details',
+              LocaleData.details.getString(context), // Update this line
               [
-                'Wage Per Day: ₹${_jobDetails!['wagePerDay']}',
-                'Duration: ${_jobDetails!['duration']} days',
-                'Category: ${_jobDetails!['category']}',
-                'Location: ${_jobDetails!['location']['address'] ?? 'N/A'}',
+                '${LocaleData.wagePerDay.getString(context)}: ₹${_jobDetails!['wagePerDay']}',
+                '${LocaleData.duration.getString(context)}: ${_jobDetails!['duration']} ${LocaleData.days.getString(context)}',
+                '${LocaleData.category.getString(context)}: ${_jobDetails!['category']}',
+                '${LocaleData.location.getString(context)}: ${_jobDetails!['location']['address'] ?? 'N/A'}',
               ],
             ),
             const SizedBox(height: 20),
 
             // Description Section
             _buildDetailsSection(
-              'Job Description',
-              [_jobDetails!['jobDescription'] ?? 'No description available.'],
+              LocaleData.jobDescription.getString(context), // Update this line
+              [_jobDetails!['jobDescription'] ?? LocaleData.noDescriptionAvailable.getString(context)], // Update this line
             ),
             const SizedBox(height: 30),
 
@@ -293,8 +296,8 @@ class _WorkerJobDetailsScreenState extends State<WorkerJobDetailsScreen> {
                             backgroundColor: theme.colorScheme.primary,
                             minimumSize: const Size(double.infinity, 50),
                           ),
-                          child: const Text(
-                            'Rate Employer',
+                          child: Text(
+                            LocaleData.rateEmployer.getString(context), // Update this line
                             style: TextStyle(fontSize: 16, color: Colors.white),
                           ),
                         ),
@@ -306,7 +309,7 @@ class _WorkerJobDetailsScreenState extends State<WorkerJobDetailsScreen> {
                             minimumSize: const Size(double.infinity, 50),
                           ),
                           child: Text(
-                            'Applied (Accepted)',
+                            '${LocaleData.applied.getString(context)} (${LocaleData.accepted.getString(context)})', // Update this line
                             style: TextStyle(
                               fontSize: 16,
                               color: Colors.black,
@@ -324,7 +327,7 @@ class _WorkerJobDetailsScreenState extends State<WorkerJobDetailsScreen> {
                       minimumSize: const Size(double.infinity, 50),
                     ),
                     child: Text(
-                      'Applied (${application.status ?? 'Unknown'})',
+                      '${LocaleData.applied.getString(context)} (${application.status ?? LocaleData.unknown.getString(context)})', // Update this line
                       style: TextStyle(
                         fontSize: 16,
                         color: Colors.black,
@@ -342,8 +345,8 @@ class _WorkerJobDetailsScreenState extends State<WorkerJobDetailsScreen> {
                     backgroundColor: theme.colorScheme.primary,
                     minimumSize: const Size(double.infinity, 50),
                   ),
-                  child: const Text(
-                    'Apply Now',
+                  child: Text(
+                    LocaleData.applyNow.getString(context), // Update this line
                     style: TextStyle(fontSize: 16, color: Colors.white),
                   ),
                 );
@@ -371,11 +374,11 @@ class _WorkerJobDetailsScreenState extends State<WorkerJobDetailsScreen> {
           _jobDetails!['employerId'], _jobDetails!['jobTitle'], _worker!.name);
 
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Application submitted successfully')),
+        SnackBar(content: Text(LocaleData.applicationSubmittedSuccessfully.getString(context))), // Update this line
       );
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error submitting application: $e')),
+        SnackBar(content: Text('${LocaleData.errorSubmittingApplication.getString(context)} $e')), // Update this line
       );
     }
   }

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:daily_wage_app/localization/locales.dart';
 import 'package:daily_wage_app/pages/auth/login_screen.dart';
 import 'package:daily_wage_app/pages/navigator_screen.dart';
 import 'package:daily_wage_app/providers/application_provider.dart';
@@ -11,14 +12,17 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter_localization/flutter_localization.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized(); // Ensure initialized
   await Firebase.initializeApp(); // Initialize Firebase
   await ensureIdFieldsInFirestore();
   await initializeNotifications();
+  await FlutterLocalization.instance
+      .ensureInitialized(); // Ensure FlutterLocalization is initialized
   runApp(
     MultiProvider(
       providers: [
@@ -100,8 +104,21 @@ Future<void> ensureIdFieldsInFirestore() async {
 }
 
 // Main application widget
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  final FlutterLocalization localization = FlutterLocalization.instance;
+
+  @override
+  void initState() {
+    configureLocalization();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -119,10 +136,21 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: themeProvider.theme,
       debugShowCheckedModeBanner: false,
+      supportedLocales: localization.supportedLocales,
+      localizationsDelegates: localization.localizationsDelegates,
       home: user != null
           ? NavigatorScreen()
           : const LoginScreen(), // Check if user is logged in
     );
+  }
+
+  void configureLocalization() {
+    localization.init(mapLocales: LOCALES, initLanguageCode: 'en');
+    localization.onTranslatedLanguage = onTranslatedLanguage;
+  }
+
+  void onTranslatedLanguage(Locale? locale) {
+    setState(() {});
   }
 }
 
@@ -132,71 +160,3 @@ void listenForNotifications(String userId) {
   notificationService.listenForNotifications(
       userId, flutterLocalNotificationsPlugin);
 }
-
-// Future<void> _initializeFCM() async {
-//   FirebaseMessaging messaging = FirebaseMessaging.instance;
-
-//   // Request permission on iOS
-//   NotificationSettings settings = await messaging.requestPermission(
-//     alert: true,
-//     badge: true,
-//     sound: true,
-//   );
-//   print("User granted permission: ${settings.authorizationStatus}");
-
-//   // Get the FCM token (you can store this token in the user document in Firestore)
-//   String? token = await messaging.getToken();
-//   print("FCM Token: $token");
-
-//   // Handle foreground messages
-//   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-//     print('Message received: ${message.notification?.title}');
-//     // Handle foreground notification here
-//   });
-
-//   // Handle background messages
-//   FirebaseMessaging.onBackgroundMessage(_backgroundMessageHandler);
-
-//   // Listen for changes in application status (assuming you have an 'applications' collection)
-//   FirebaseFirestore.instance
-//       .collection('applications')
-//       .snapshots()
-//       .listen((snapshot) {
-//     for (var doc in snapshot.docs) {
-//       var data = doc.data();
-//       String status = data['status'];
-//       String jobId = data['jobId'];
-//       String workerId = data['workerId'];
-
-//       // If the status changes (application accepted, rejected, or job details updated)
-//       if (status == 'accepted' || status == 'rejected' || status == 'updated') {
-//         _sendApplicationStatusNotification(workerId, status, jobId);
-//       }
-//     }
-//   });
-// }
-
-// // Function to send notification to worker when application status changes
-// Future<void> _sendApplicationStatusNotification(
-//     String workerId, String status, String jobId) async {
-//   // Fetch the worker's FCM token from Firestore (assuming the worker document contains FCM token)
-//   DocumentSnapshot workerDoc =
-//       await FirebaseFirestore.instance.collection('users').doc(workerId).get();
-//   String? fcmToken = workerDoc[
-//       'fcmToken']; // Ensure the worker's FCM token is stored in Firestore
-
-//   if (fcmToken != null) {
-//     // Create the message content based on status
-//     String title = 'Application Status Update';
-//     String body = 'Your application for job $jobId has been $status.';
-
-//     // Send the notification
-//     FCMService fcmService = FCMService();
-//     await fcmService.sendNotification(fcmToken, title, body);
-//   }
-// }
-
-// // Background message handler
-// Future<void> _backgroundMessageHandler(RemoteMessage message) async {
-//   print("Background Message: ${message.notification?.title}");
-// }

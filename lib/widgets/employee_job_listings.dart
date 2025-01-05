@@ -2,8 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:daily_wage_app/models/job_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localization/flutter_localization.dart'; // Add this import
 
 import '../configs/theme.dart';
+import '../localization/locales.dart'; // Add this import
 
 class EmployerJobListWidget extends StatefulWidget {
   const EmployerJobListWidget({super.key});

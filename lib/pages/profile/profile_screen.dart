@@ -10,6 +10,9 @@ import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_localization/flutter_localization.dart'; // Add this import
+
+import '../../localization/locales.dart'; // Add this import
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -109,7 +112,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
       ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Please enable location services')));
+          SnackBar(content: Text(LocaleData.enableLocationServices.getString(context)))); // Update this line
       return;
     }
 
@@ -119,7 +122,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       PermissionStatus status = await Permission.location.request();
       if (!status.isGranted) {
         ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Location permission denied')));
+            SnackBar(content: Text(LocaleData.locationPermissionDenied.getString(context)))); // Update this line
         return;
       }
     }
@@ -145,11 +148,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
       });
 
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Profile updated successfully')),
+        SnackBar(content: Text(LocaleData.profileUpdatedSuccessfully.getString(context))), // Update this line
       );
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Failed to update profile: $e')),
+        SnackBar(content: Text('${LocaleData.failedToUpdateProfile.getString(context)} $e')), // Update this line
       );
     }
   }
@@ -160,7 +163,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Profile'),
+        title: Text(LocaleData.profile.getString(context)), // Update this line
         actions: [
           IconButton(
             icon: Icon(Icons.logout),
@@ -185,20 +188,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
               SizedBox(height: 20),
-              _buildEditableField('Name', _nameController, _nameFocusNode),
+              _buildEditableField(LocaleData.name.getString(context), _nameController, _nameFocusNode), // Update this line
               SizedBox(height: 15),
-              _buildUneditableField('Email', _emailController, _emailFocusNode),
+              _buildUneditableField(LocaleData.email.getString(context), _emailController, _emailFocusNode), // Update this line
               SizedBox(height: 15),
-              _buildEditableField('Phone', _phoneController, _phoneFocusNode),
+              _buildEditableField(LocaleData.phone.getString(context), _phoneController, _phoneFocusNode), // Update this line
               SizedBox(height: 15),
               _buildLocationField(),
               SizedBox(height: 15),
-              _buildUneditableField('Role',
+              _buildUneditableField(LocaleData.role.getString(context), // Update this line
                   TextEditingController()..text = _role, _roleFocusNode),
               SizedBox(height: 20),
               ElevatedButton(
                 onPressed: _saveProfile,
-                child: Text('Save Changes'),
+                child: Text(LocaleData.saveChanges.getString(context)), // Update this line
               ),
             ],
           ),
@@ -270,7 +273,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Location', style: TextStyle(fontWeight: FontWeight.bold)),
+        Text(LocaleData.location.getString(context), style: TextStyle(fontWeight: FontWeight.bold)), // Update this line
         Row(
           children: [
             Expanded(
@@ -283,7 +286,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 child: TextField(
                   controller: _locationController,
                   decoration: InputDecoration(
-                    hintText: 'Enter location or use geolocation',
+                    hintText: LocaleData.enterLocationOrUseGeolocation.getString(context), // Update this line
                     border: InputBorder.none,
                   ),
                 ),
@@ -296,7 +299,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ],
         ),
         SwitchListTile(
-          title: Text("Use Geolocation"),
+          title: Text(LocaleData.useGeolocation.getString(context)), // Update this line
           value: _useGeolocation,
           onChanged: (bool value) {
             setState(() {

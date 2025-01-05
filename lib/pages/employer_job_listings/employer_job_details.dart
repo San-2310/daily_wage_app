@@ -3,6 +3,9 @@ import 'package:daily_wage_app/widgets/applications_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:flutter_localization/flutter_localization.dart'; // Add this import
+
+import '../../localization/locales.dart'; // Add this import
 
 class EmployerJobDetailsScreen extends StatefulWidget {
   final String jobId;
@@ -77,7 +80,7 @@ class _EmployerJobDetailsScreenState extends State<EmployerJobDetailsScreen>
       }
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text('Error fetching job details: $e'),
+        content: Text(LocaleData.errorFetchingJobDetails.getString(context)), // Update this line
       ));
     }
   }
@@ -107,11 +110,11 @@ class _EmployerJobDetailsScreenState extends State<EmployerJobDetailsScreen>
           .doc(widget.jobId)
           .update(updatedJob);
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text('Job updated successfully'),
+        content: Text(LocaleData.jobUpdatedSuccessfully.getString(context)), // Update this line
       ));
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text('Error updating job: $e'),
+        content: Text('${LocaleData.errorUpdatingJob.getString(context)} $e'), // Update this line
       ));
     } finally {
       setState(() {
@@ -132,12 +135,12 @@ class _EmployerJobDetailsScreenState extends State<EmployerJobDetailsScreen>
           .doc(widget.jobId)
           .delete();
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text('Job deleted successfully'),
+        content: Text(LocaleData.jobDeletedSuccessfully.getString(context)), // Update this line
       ));
       Navigator.pop(context);
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text('Error deleting job: $e'),
+        content: Text('${LocaleData.errorDeletingJob.getString(context)} $e'), // Update this line
       ));
     } finally {
       setState(() {
@@ -145,63 +148,6 @@ class _EmployerJobDetailsScreenState extends State<EmployerJobDetailsScreen>
       });
     }
   }
-
-  // Future<List<Map<String, dynamic>>> _fetchJobApplications() async {
-  //   try {
-  //     // Log the jobId to confirm it's being passed correctly
-  //     print('Fetching applications for Job ID: ${widget.jobId}');
-
-  //     QuerySnapshot applicationsSnapshot = await FirebaseFirestore.instance
-  //         .collection('applications')
-  //         .where('jobId', isEqualTo: widget.jobId)
-  //         .get();
-
-  //     // Check how many documents were returned
-  //     print(
-  //         'Number of applications found: ${applicationsSnapshot.docs.length}');
-
-  // if (applicationsSnapshot.docs.isEmpty) {
-  //   // Log if no documents were found
-  //   print('No applications found for this job.');
-  // }
-
-  // List<Map<String, dynamic>> applications = [];
-  // for (var doc in applicationsSnapshot.docs) {
-  //   var applicationData = doc.data() as Map<String, dynamic>;
-  //   print('Application Data: $applicationData');
-
-  //   // Only process applications with status "applied"
-  //   if (applicationData['status'] == 'applied') {
-  //     // Fetch the worker details based on workerId from the application data
-  //     var workerSnapshot = await FirebaseFirestore.instance
-  //         .collection('users')
-  //         .doc(applicationData[
-  //             'workerId']) // Use the workerId from the application
-  //         .get();
-
-  //     // Check if the worker document exists
-  //     if (workerSnapshot.exists) {
-  //       var workerData = workerSnapshot.data() as Map<String, dynamic>;
-  //       print('Worker Data: $workerData');
-  //       applications.add({
-  //         'workerName': workerData['name'],
-  //         'workerId': applicationData['workerId'],
-  //         'status': applicationData['status'],
-  //       });
-  //     } else {
-  //       // Log if worker data doesn't exist
-  //       print(
-  //           'Worker not found for workerId: ${applicationData['workerId']}');
-  //     }
-  //   }
-  //     }
-
-  //     return applications;
-  //   } catch (e) {
-  //     print('Error fetching applications: $e'); // Log any errors
-  //     throw Exception('Error fetching applications: $e');
-  //   }
-  // }
 
   @override
   void dispose() {
@@ -221,7 +167,7 @@ class _EmployerJobDetailsScreenState extends State<EmployerJobDetailsScreen>
     final theme = Theme.of(context);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Job Details')),
+      appBar: AppBar(title: Text(LocaleData.jobDetails.getString(context))), // Update this line
       body: SingleChildScrollView(
         child: SafeArea(
           child: Container(
@@ -232,9 +178,9 @@ class _EmployerJobDetailsScreenState extends State<EmployerJobDetailsScreen>
                 const SizedBox(height: 30),
                 TabBar(
                   controller: _tabController,
-                  tabs: const [
-                    Tab(text: 'Job Details'),
-                    Tab(text: 'Applications'),
+                  tabs: [
+                    Tab(text: LocaleData.jobDetails.getString(context)), // Update this line
+                    Tab(text: LocaleData.applications.getString(context)), // Update this line
                   ],
                 ),
                 const SizedBox(height: 20),
@@ -266,7 +212,7 @@ class _EmployerJobDetailsScreenState extends State<EmployerJobDetailsScreen>
             TextField(
               controller: _jobTitleController,
               decoration: InputDecoration(
-                  labelText: 'Job Title',
+                  labelText: LocaleData.jobTitle.getString(context), // Update this line
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10))),
             ),
@@ -274,7 +220,7 @@ class _EmployerJobDetailsScreenState extends State<EmployerJobDetailsScreen>
             TextField(
               controller: _jobDescriptionController,
               decoration: InputDecoration(
-                  labelText: 'Job Description',
+                  labelText: LocaleData.jobDescription.getString(context), // Update this line
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10))),
             ),
@@ -283,7 +229,7 @@ class _EmployerJobDetailsScreenState extends State<EmployerJobDetailsScreen>
               controller: _numWorkersController,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
-                  labelText: 'Number of Workers',
+                  labelText: LocaleData.numWorkers.getString(context), // Update this line
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10))),
             ),
@@ -292,7 +238,7 @@ class _EmployerJobDetailsScreenState extends State<EmployerJobDetailsScreen>
               controller: _wagePerDayController,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
-                  labelText: 'Wage per Day',
+                  labelText: LocaleData.wagePerDay.getString(context), // Update this line
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10))),
             ),
@@ -301,7 +247,7 @@ class _EmployerJobDetailsScreenState extends State<EmployerJobDetailsScreen>
               controller: _durationController,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
-                  labelText: 'Duration (in days)',
+                  labelText: LocaleData.duration.getString(context), // Update this line
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10))),
             ),
@@ -309,12 +255,12 @@ class _EmployerJobDetailsScreenState extends State<EmployerJobDetailsScreen>
             TextField(
               controller: _categoryController,
               decoration: InputDecoration(
-                  labelText: 'Category',
+                  labelText: LocaleData.category.getString(context), // Update this line
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10))),
             ),
             const SizedBox(height: 16),
-            Text('Job Status'),
+            Text(LocaleData.jobStatus.getString(context)), // Update this line
             DropdownButtonFormField<String>(
               value: _jobStatus,
               items: _statusOptions.map((String status) {
@@ -333,7 +279,7 @@ class _EmployerJobDetailsScreenState extends State<EmployerJobDetailsScreen>
                       borderRadius: BorderRadius.circular(10))),
             ),
             const SizedBox(height: 16),
-            Text('Location'),
+            Text(LocaleData.location.getString(context)), // Update this line
             Row(
               children: [
                 Expanded(
@@ -341,7 +287,7 @@ class _EmployerJobDetailsScreenState extends State<EmployerJobDetailsScreen>
                     controller: _locationController,
                     decoration: InputDecoration(
                         labelText:
-                            _address != null ? _address : 'Enter location',
+                            _address != null ? _address : LocaleData.enterLocation.getString(context), // Update this line
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10))),
                     readOnly: true,
@@ -354,7 +300,7 @@ class _EmployerJobDetailsScreenState extends State<EmployerJobDetailsScreen>
               ],
             ),
             SwitchListTile(
-              title: Text('Use Geolocation'),
+              title: Text(LocaleData.useGeolocation.getString(context)), // Update this line
               value: _useGeolocation,
               onChanged: (bool value) {
                 setState(() {
@@ -385,7 +331,7 @@ class _EmployerJobDetailsScreenState extends State<EmployerJobDetailsScreen>
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Text(
-                                'Delete Job',
+                                LocaleData.deleteJob.getString(context), // Update this line
                                 style: Theme.of(context)
                                     .textTheme
                                     .bodyLarge
@@ -414,7 +360,7 @@ class _EmployerJobDetailsScreenState extends State<EmployerJobDetailsScreen>
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Text(
-                                'Update Job',
+                                LocaleData.updateJob.getString(context), // Update this line
                                 style: Theme.of(context)
                                     .textTheme
                                     .bodyLarge
@@ -488,7 +434,7 @@ class _EmployerJobDetailsScreenState extends State<EmployerJobDetailsScreen>
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
       ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Please enable location services')));
+          SnackBar(content: Text(LocaleData.enableLocationServices.getString(context)))); // Update this line
       return;
     }
 
@@ -498,7 +444,7 @@ class _EmployerJobDetailsScreenState extends State<EmployerJobDetailsScreen>
       PermissionStatus status = await Permission.location.request();
       if (!status.isGranted) {
         ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Location permission denied')));
+            SnackBar(content: Text(LocaleData.locationPermissionDenied.getString(context)))); // Update this line
         return;
       }
     }

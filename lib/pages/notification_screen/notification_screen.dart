@@ -3,6 +3,9 @@ import 'package:daily_wage_app/models/notification_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_localization/flutter_localization.dart'; // Add this import
+
+import '../../localization/locales.dart'; // Add this import
 
 class NotificationScreen extends StatelessWidget {
   @override
@@ -11,9 +14,9 @@ class NotificationScreen extends StatelessWidget {
     if (user == null) {
       return Scaffold(
         appBar: AppBar(
-          title: const Text('Notifications'),
+          title: Text(LocaleData.notifications.getString(context)), // Update this line
         ),
-        body: const Center(child: Text('No user is signed in')),
+        body: Center(child: Text(LocaleData.noUserSignedIn.getString(context))), // Update this line
       );
     }
 
@@ -21,7 +24,7 @@ class NotificationScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Notifications'),
+        title: Text(LocaleData.notifications.getString(context)), // Update this line
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance
@@ -36,7 +39,7 @@ class NotificationScreen extends StatelessWidget {
           }
 
           if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-            return const Center(child: Text('No notifications available.'));
+            return Center(child: Text(LocaleData.noNotifications.getString(context))); // Update this line
           }
 
           // List of notifications fetched from Firestore
