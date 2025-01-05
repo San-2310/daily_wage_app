@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "daily-wage-app",
+  "private_key_id": "1d4461bf4c3d2c304f643238374701a306924ab3",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCz87PTLgLIAXsc\nnMwtTfVm/Q2F6Gf9RjO33P5MaoF1ZSWic5d9eECxJAfalNcgjcS3QYdcSXgL/+7q\nfjoQLDm4HgR/kyYu3j37WLVqtRHNCDw0WgtsjvtqlICohXKV4p43ZhpvF3AewcrT\nTg1psi+rzs42L8Bxsug2vmMau56ir3RAkU2S2qTnQsnqi6YAawOCx7CoTWcnk3p0\nvea/ZrgUFLpaOx1Z9VNxOr2X95btrSqYTPKQZATWGVlJcqKg3XQ0+P2WEsq/vCx4\nR5hH+KSJK0KZz9lgAbO+QKEfxK4xiBuWCuygHTYsRuSK/aLg0CSjy9PfwoUvyOo/\nnuPf8saTAgMBAAECggEAMTaN0Ew+AHq/M4UCJcWzPlYoU53Kiq6fSEJM3ZMnEnb2\nAuZ/4JV5g7hp2XJpHwMGcGOgZDHHfeiha0nYEUI3Cs5Sxpz0jU7EPq/09VjNpHgD\nFwIlK6wyv+QbB3tvaeRPBrGKuyT6yb6P/JfU/Tn45ZCqPpFynOWjsg0BR3dWHAFP\nTNfsEzU38rta/jTWFSxv0NwC9ZXPjKRoHQGVUOifLnmkEi8Utw0fFzDCpxCq22HU\nbNJi2p7xqr5hUoS4BNjbWnU9oMQgZJL13QPOSYP9UzD1xV5N8kKbTubk8bFZO7Tz\nS0BtY4rcBH3zgHVhzBYx4UyKbN8vlf9evooEEQu+KQKBgQD2t3qf2LOQbinyoZfm\nSSptdoKe7uWDDwk8Q0eAO4RGcJJbNDtQEpzTLxHxlSUGUZAqumtrtMlf1A6Q9RKO\nQ0QJ7RxdsZ7/Pw9GbxgkmGa59YPtX5TzoXPZ5UgdYq7IbXWjy17vyk2d3m20pPpL\nG5I+4cgXTFG5bYFLXoRtfpheJwKBgQC6uRsfNNBK0mC0TA3XI+06ksOX76SUM+hQ\n/5qPrDUOrrW9sTdzfekL1KMQfN5zINpI6qcnzV3Scpu6j9m5EqRla31/FWBPadTQ\ncJnxrKb44tYY2N+1TTGZ5NKxzugte09t3KTsKsATQ6LhyprioFHLbTkIGaqjCNcL\nDFeoZkxDtQKBgQCKZVQxNKNNwq5fP8xwztww+Ui+lO5EPXwFxQvn3/sMdHt1E/Ct\nszMrt/zN0scpKzm+7kHx8kEAM3lUUVVuXkdddhfyav/w2NPdw9X8OU1uxU2TK4nn\nvMq7EUYJzeCT5+sUzbFcu9QcWbiam+0XksjP42GVyCcT6FyeBdAth9U7AwKBgGNv\n8m6i/I3sDU3W9sPswQghYoJGP7ohDoYcKN58UeEYz3ZOqv4ZPoNrYM+GAB0FkNmm\nBRCgQGezWxV2R/dUYzITlUiZRKnl7Ux3urPGQ0Fl46hlznTJwDF5d27zhhe6hGk4\nSKfweEuKCHMAJ42q3QRdjTKwIHwkWAjtML1ghRrFAoGBAM1gepTyuRfyywtTUTbK\nreRIFGnYJYSYyoiGS5tsAYU5RRvSZy2Fz0kxDsZEi6cQyq3HmT8UET8PHKGF8R8n\nBRCuKeKw6H9K0f08E6wntEIH9CnHKchJT5nvlsxOXqvX3PPSA9PFvjynB7OsfQFI\nEf0yh3ZFvVs50bL+n4Smbpk8\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-v4478@daily-wage-app.iam.gserviceaccount.com",
+  "client_id": "111061671780821397537",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-v4478%40daily-wage-app.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

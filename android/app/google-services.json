@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "671144197215",
+    "project_id": "daily-wage-app",
+    "storage_bucket": "daily-wage-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:671144197215:android:3d773be8aec6af32122fea",
+        "android_client_info": {
+          "package_name": "com.example.daily_wage_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4rJZ1sKv56QbunhpqmxAYbScgtsBjDAY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
