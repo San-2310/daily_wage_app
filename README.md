@@ -2,14 +2,22 @@
 
 A Flutter application designed to connect employers with daily wage workers, providing a simple and efficient platform for job posting and worker-employer interaction.
 
+## APK Download
+
+You can download the latest version of the Daily Wage App APK directly from this repository:
+
+[Download APK](https://github.com/San-2310/daily_wage_app/blob/main/apk/app-release.apk?raw=true)
+
 ## Features
 
 ### User Authentication
+
 - Dual role system (Employer/Worker)
 - Email/password-based authentication using Firebase
 - Profile management with location, contact details, and phone number
 
 ### For Employers
+
 - Create and manage job listings with detailed information:
   - Job title and description
   - Location (manual entry or geolocation)
@@ -22,6 +30,7 @@ A Flutter application designed to connect employers with daily wage workers, pro
 - Manage active job listings (edit/delete)
 
 ### For Workers
+
 - Browse available jobs based on location
 - Filter jobs by:
   - Wage (high to low)
@@ -31,6 +40,7 @@ A Flutter application designed to connect employers with daily wage workers, pro
 - View job application status
 
 ### Additional Features
+
 - Multilingual support (English and Hindi)
 - Local notifications for:
   - New job postings
@@ -43,7 +53,9 @@ A Flutter application designed to connect employers with daily wage workers, pro
 ## Technical Details
 
 ### Architecture
+
 The project has the following structure:
+
 ```
 lib/
 ├── configs/      # Configuration files
@@ -56,6 +68,7 @@ lib/
 ```
 
 ### Dependencies
+
 - **State Management**: Provider
 - **Authentication**: Firebase Auth
 - **Database**: Cloud Firestore
@@ -65,6 +78,7 @@ lib/
 - **UI**: Material Design
 
 ### Key Packages
+
 ```yaml
 provider: ^6.1.2
 geolocator: ^13.0.2
@@ -78,22 +92,27 @@ intl: ^0.19.0
 ## Getting Started
 
 ### Prerequisites
+
 - Flutter SDK (^3.5.3)
 - Firebase account
 - Android Studio / VS Code
 
 ### Installation
+
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/San-2310/daily_wage_app.git
    ```
 
 2. Install dependencies:
+
    ```bash
    flutter pub get
    ```
 
 3. Configure Firebase:
+
    - Create a new Firebase project
    - Add Android/iOS apps in Firebase console
    - Download and add configuration files
@@ -105,11 +124,13 @@ intl: ^0.19.0
    ```
 
 ### Configuration
+
 - Update `firebase_options.dart` with your Firebase credentials
 - Configure supported languages in `localization/`
 - Set up local notification channels in `services/notification_service.dart`
 
 ## UI/UX Considerations
+
 - Simple and intuitive interface for users with limited education
 - Clear navigation structure
 - Easy-to-read typography using Poppins font family
@@ -117,6 +138,7 @@ intl: ^0.19.0
 - Language switcher easily accessible from all screens
 
 ## Future Improvements
+
 - Advanced job matching algorithm
 - In-app messaging between workers and employers
 - Job history tracking
