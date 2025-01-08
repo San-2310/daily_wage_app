@@ -190,7 +190,7 @@ class _EmployerJobDetailsScreenState extends State<EmployerJobDetailsScreen>
                     controller: _tabController,
                     children: [
                       _buildJobDetailsForm(),
-                      ApplicationTab(),
+                      ApplicationTab(jobId: widget.jobId), // Update this line
                     ],
                   ),
                 ),

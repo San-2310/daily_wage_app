@@ -1,8 +1,10 @@
 import 'package:daily_wage_app/services/auth_services.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localization/flutter_localization.dart'; // Add this import
 import 'package:geolocator/geolocator.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+import '../../localization/locales.dart'; // Add this import
 import 'login_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -121,7 +123,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               children: [
                 const SizedBox(height: 60),
                 Text(
-                  'Sign Up',
+                  LocaleData.signUp.getString(context), // Update this line
                   style: theme.textTheme.headlineMedium?.copyWith(fontSize: 35),
                 ),
                 const SizedBox(height: 60),
@@ -137,18 +139,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const SizedBox(height: 30),
-                        Text("Name",
+                        Text(
+                            LocaleData.name
+                                .getString(context), // Update this line
                             style: theme.textTheme.bodyLarge
                                 ?.copyWith(fontWeight: FontWeight.bold)),
                         const SizedBox(height: 8),
                         TextField(
                             controller: _nameController,
                             decoration: InputDecoration(
-                                hintText: 'Enter your full name',
+                                hintText: LocaleData.enterFullName
+                                    .getString(context), // Update this line
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(10)))),
                         const SizedBox(height: 24),
-                        Text("Email",
+                        Text(
+                            LocaleData.email
+                                .getString(context), // Update this line
                             style: theme.textTheme.bodyLarge
                                 ?.copyWith(fontWeight: FontWeight.bold)),
                         const SizedBox(height: 8),
@@ -156,11 +163,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             controller: _emailController,
                             keyboardType: TextInputType.emailAddress,
                             decoration: InputDecoration(
-                                hintText: 'Enter your email',
+                                hintText: LocaleData.enterEmail
+                                    .getString(context), // Update this line
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(10)))),
                         const SizedBox(height: 24),
-                        Text("Phone Number",
+                        Text(
+                            LocaleData.phone
+                                .getString(context), // Update this line
                             style: theme.textTheme.bodyLarge
                                 ?.copyWith(fontWeight: FontWeight.bold)),
                         const SizedBox(height: 8),
@@ -168,11 +178,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             controller: _phoneController,
                             keyboardType: TextInputType.phone,
                             decoration: InputDecoration(
-                                hintText: 'Enter your phone number',
+                                hintText: LocaleData.enterPhoneNumber
+                                    .getString(context), // Update this line
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(10)))),
                         const SizedBox(height: 24),
-                        Text("Location",
+                        Text(
+                            LocaleData.location
+                                .getString(context), // Update this line
                             style: theme.textTheme.bodyLarge
                                 ?.copyWith(fontWeight: FontWeight.bold)),
                         const SizedBox(height: 8),
@@ -182,8 +195,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 child: TextField(
                                     controller: _locationController,
                                     decoration: InputDecoration(
-                                        hintText:
-                                            'Enter location or use geolocation',
+                                        hintText: LocaleData
+                                            .enterLocationOrUseGeolocation
+                                            .getString(
+                                                context), // Update this line
                                         border: OutlineInputBorder(
                                             borderRadius:
                                                 BorderRadius.circular(10))))),
@@ -195,7 +210,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ],
                         ),
                         SwitchListTile(
-                          title: Text("Use Geolocation"),
+                          title: Text(LocaleData.useGeolocation
+                              .getString(context)), // Update this line
                           value: _useGeolocation,
                           onChanged: (bool value) {
                             setState(() {
@@ -204,7 +220,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           },
                         ),
                         const SizedBox(height: 24),
-                        Text("Role",
+                        Text(
+                            LocaleData.role
+                                .getString(context), // Update this line
                             style: theme.textTheme.bodyLarge
                                 ?.copyWith(fontWeight: FontWeight.bold)),
                         const SizedBox(height: 8),
@@ -217,7 +235,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: DropdownButton<String>(
-                              hint: Text('Select your role'),
+                              hint: Text(LocaleData.selectRole
+                                  .getString(context)), // Update this line
                               value: _role,
                               onChanged: (String? newValue) {
                                 setState(() {
@@ -235,7 +254,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                         ),
                         const SizedBox(height: 24),
-                        Text("Password",
+                        Text(
+                            LocaleData.password
+                                .getString(context), // Update this line
                             style: theme.textTheme.bodyLarge
                                 ?.copyWith(fontWeight: FontWeight.bold)),
                         const SizedBox(height: 8),
@@ -243,11 +264,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             controller: _passwordController,
                             obscureText: true,
                             decoration: InputDecoration(
-                                hintText: 'Enter your password',
+                                hintText: LocaleData.enterPassword
+                                    .getString(context), // Update this line
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(10)))),
                         const SizedBox(height: 24),
-                        Text("Confirm Password",
+                        Text(
+                            LocaleData.confirmPassword
+                                .getString(context), // Update this line
                             style: theme.textTheme.bodyLarge
                                 ?.copyWith(fontWeight: FontWeight.bold)),
                         const SizedBox(height: 8),
@@ -255,7 +279,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             controller: _confirmPasswordController,
                             obscureText: true,
                             decoration: InputDecoration(
-                                hintText: 'Confirm your password',
+                                hintText: LocaleData.confirmPassword
+                                    .getString(context), // Update this line
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(10)))),
                         const SizedBox(height: 24),
@@ -275,7 +300,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                         Colors.white),
                                   )
                                 : Text(
-                                    'Register',
+                                    LocaleData.register
+                                        .getString(context), // Update this line
                                     style: theme.textTheme.bodyLarge?.copyWith(
                                         color: theme.colorScheme.onPrimary),
                                   ),
@@ -289,7 +315,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("OR",
+                    Text(LocaleData.or.getString(context), // Update this line
                         style:
                             theme.textTheme.bodyLarge?.copyWith(fontSize: 20)),
                   ],
@@ -298,7 +324,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Already have an account?",
+                    Text(
+                        LocaleData.alreadyHaveAccount
+                            .getString(context), // Update this line
                         style: theme.textTheme.bodyMedium),
                     GestureDetector(
                       onTap: () {
@@ -307,7 +335,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             MaterialPageRoute(
                                 builder: (context) => LoginScreen()));
                       },
-                      child: Text(" Log In",
+                      child: Text(
+                          LocaleData.logIn
+                              .getString(context), // Update this line
                           style: theme.textTheme.bodyMedium?.copyWith(
                               fontWeight: FontWeight.bold,
                               color: theme.colorScheme.primary)),

@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:daily_wage_app/pages/notification_screen/notification_screen.dart';
-import 'package:daily_wage_app/widgets/all_job_fliter.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localization/flutter_localization.dart'; // Add this import
@@ -211,7 +210,15 @@ class _EmployerHomeScreenState extends State<EmployerHomeScreen> {
                                       Icons.add,
                                       size: 32,
                                     ),
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              CreateJobScreen(),
+                                        ),
+                                      );
+                                    },
                                   ),
                                 ),
                               ),
@@ -280,45 +287,45 @@ class _EmployerHomeScreenState extends State<EmployerHomeScreen> {
               ),
               Container(child: EmployerJobListWidget()),
               SizedBox(height: 16),
-              Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      LocaleData.allJobListings
-                          .getString(context), // Update this line
-                      style:
-                          Theme.of(context).textTheme.headlineMedium?.copyWith(
-                                fontWeight: FontWeight.bold,
-                                color: Theme.of(context).colorScheme.onSurface,
-                                fontSize: 20,
-                              ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 16),
-              Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      LocaleData.sortBy.getString(context), // Update this line
-                      style: Theme.of(context)
-                          .textTheme
-                          .headlineSmall
-                          ?.copyWith(
-                            fontWeight: FontWeight.bold,
-                            color: Theme.of(context).colorScheme.onSecondary,
-                            fontSize: 12,
-                          ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                ],
-              ),
-              JobFilterWidget(),
+              // Row(
+              //   children: [
+              //     Expanded(
+              //       child: Text(
+              //         LocaleData.allJobListings
+              //             .getString(context), // Update this line
+              //         style:
+              //             Theme.of(context).textTheme.headlineMedium?.copyWith(
+              //                   fontWeight: FontWeight.bold,
+              //                   color: Theme.of(context).colorScheme.onSurface,
+              //                   fontSize: 20,
+              //                 ),
+              //         maxLines: 1,
+              //         overflow: TextOverflow.ellipsis,
+              //       ),
+              //     ),
+              //   ],
+              // ),
+              // SizedBox(height: 16),
+              // Row(
+              //   children: [
+              //     Expanded(
+              //       child: Text(
+              //         LocaleData.sortBy.getString(context), // Update this line
+              //         style: Theme.of(context)
+              //             .textTheme
+              //             .headlineSmall
+              //             ?.copyWith(
+              //               fontWeight: FontWeight.bold,
+              //               color: Theme.of(context).colorScheme.onSecondary,
+              //               fontSize: 12,
+              //             ),
+              //         maxLines: 1,
+              //         overflow: TextOverflow.ellipsis,
+              //       ),
+              //     ),
+              //   ],
+              // ),
+              //JobFilterWidget(),
             ],
           ),
         ),

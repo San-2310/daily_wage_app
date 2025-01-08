@@ -2,10 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:daily_wage_app/models/job_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_localization/flutter_localization.dart'; // Add this import
 
 import '../configs/theme.dart';
-import '../localization/locales.dart'; // Add this import
 
 class EmployerJobListWidget extends StatefulWidget {
   const EmployerJobListWidget({super.key});
@@ -62,8 +60,10 @@ class _EmployerJobListWidgetState extends State<EmployerJobListWidget> {
         : Padding(
             padding: const EdgeInsets.all(8.0),
             child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
+              //scrollDirection: Axis.horizontal,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: _jobs
                     .asMap()
                     .map((index, job) {
@@ -73,67 +73,75 @@ class _EmployerJobListWidgetState extends State<EmployerJobListWidget> {
                           : AppColors.lightBlue;
                       return MapEntry(
                         index,
-                        Stack(
+                        Column(
                           children: [
-                            Container(
-                              width: 250,
-                              height: 120,
-                              margin: EdgeInsets.only(right: 10),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: jobColor,
-                              ),
-                              padding: EdgeInsets.all(10),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    job.jobTitle,
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18,
-                                      color: Colors.white,
+                            Stack(
+                              children: [
+                                Container(
+                                  width: double.infinity,
+                                  height: 120,
+                                  margin: EdgeInsets.only(right: 10),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: jobColor,
+                                  ),
+                                  padding: EdgeInsets.all(10),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        job.jobTitle,
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 18,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      SizedBox(height: 5),
+                                      Text(
+                                        job.jobDescription,
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          color: Colors.white70,
+                                        ),
+                                        maxLines: 3,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Positioned(
+                                  right: 20,
+                                  top: -25,
+                                  child: Container(
+                                    width: 60,
+                                    height: 60,
+                                    decoration: BoxDecoration(
+                                      color: const Color.fromARGB(
+                                          150, 142, 167, 230),
+                                      borderRadius: BorderRadius.circular(2000),
                                     ),
                                   ),
-                                  SizedBox(height: 5),
-                                  Text(
-                                    job.jobDescription,
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                      color: Colors.white70,
+                                ),
+                                Positioned(
+                                  right: 27,
+                                  top: -25,
+                                  child: Container(
+                                    width: 45,
+                                    height: 45,
+                                    decoration: BoxDecoration(
+                                      color: const Color.fromARGB(
+                                          150, 142, 167, 230),
+                                      borderRadius: BorderRadius.circular(2000),
                                     ),
-                                    maxLines: 3,
-                                    overflow: TextOverflow.ellipsis,
                                   ),
-                                ],
-                              ),
-                            ),
-                            Positioned(
-                              right: 20,
-                              top: -25,
-                              child: Container(
-                                width: 60,
-                                height: 60,
-                                decoration: BoxDecoration(
-                                  color:
-                                      const Color.fromARGB(150, 142, 167, 230),
-                                  borderRadius: BorderRadius.circular(2000),
                                 ),
-                              ),
+                              ],
                             ),
-                            Positioned(
-                              right: 27,
-                              top: -25,
-                              child: Container(
-                                width: 45,
-                                height: 45,
-                                decoration: BoxDecoration(
-                                  color:
-                                      const Color.fromARGB(150, 142, 167, 230),
-                                  borderRadius: BorderRadius.circular(2000),
-                                ),
-                              ),
+                            SizedBox(
+                              height: 8,
                             ),
                           ],
                         ),
