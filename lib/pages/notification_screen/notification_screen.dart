@@ -8,6 +8,8 @@ import 'package:flutter_localization/flutter_localization.dart'; // Add this imp
 import '../../localization/locales.dart'; // Add this import
 
 class NotificationScreen extends StatelessWidget {
+  const NotificationScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     final user = FirebaseAuth.instance.currentUser;
@@ -81,21 +83,21 @@ class NotificationScreen extends StatelessWidget {
                     contentPadding: const EdgeInsets.all(16.0),
                     title: Text(
                       notification.title,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Colors.black,
                       ),
                     ),
                     subtitle: Text(
                       notification.message,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.black54,
                       ),
                     ),
                     trailing: Text(
                       DateFormat('MMM dd, yyyy hh:mm a')
                           .format(notification.timestamp),
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.black45,
                         fontSize: 12,
                       ),

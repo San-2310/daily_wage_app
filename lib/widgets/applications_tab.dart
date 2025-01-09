@@ -12,7 +12,7 @@ import '../localization/locales.dart'; // Add this import
 class ApplicationTab extends StatefulWidget {
   final String jobId; // Add this line
 
-  ApplicationTab({required this.jobId}); // Update this line
+  const ApplicationTab({super.key, required this.jobId}); // Update this line
 
   @override
   _ApplicationTabState createState() => _ApplicationTabState();
@@ -180,7 +180,7 @@ class _ApplicationTabState extends State<ApplicationTab> {
           .snapshots(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         }
 
         if (snapshot.hasError) {
@@ -227,7 +227,7 @@ class _ApplicationTabState extends State<ApplicationTab> {
           future: fetchApplications(),
           builder: (context, futureSnapshot) {
             if (futureSnapshot.connectionState == ConnectionState.waiting) {
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             }
 
             if (futureSnapshot.hasError) {
@@ -252,7 +252,7 @@ class _ApplicationTabState extends State<ApplicationTab> {
                 String applicationId = application['applicationId'] ?? '';
 
                 if (applicationId.isEmpty) {
-                  return SizedBox.shrink();
+                  return const SizedBox.shrink();
                 }
 
                 return GestureDetector(
@@ -307,8 +307,8 @@ class _ApplicationTabState extends State<ApplicationTab> {
                     );
                   },
                   child: Container(
-                    margin: EdgeInsets.symmetric(vertical: 10),
-                    padding: EdgeInsets.all(16),
+                    margin: const EdgeInsets.symmetric(vertical: 10),
+                    padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
                       color: Colors.blue.shade50,
                       borderRadius: BorderRadius.circular(10),
@@ -316,13 +316,13 @@ class _ApplicationTabState extends State<ApplicationTab> {
                         BoxShadow(
                           color: Colors.grey.shade300,
                           blurRadius: 5,
-                          offset: Offset(0, 2),
+                          offset: const Offset(0, 2),
                         ),
                       ],
                     ),
                     child: Row(
                       children: [
-                        SizedBox(width: 16),
+                        const SizedBox(width: 16),
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -337,14 +337,14 @@ class _ApplicationTabState extends State<ApplicationTab> {
                         ),
                         if (status == 'accepted') ...[
                           IconButton(
-                            icon: Icon(Icons.star, color: Colors.yellow),
+                            icon: const Icon(Icons.star, color: Colors.yellow),
                             onPressed: () {
                               _showRatingDialog(
                                   application['workerId'], applicationId);
                             },
                           ),
                           IconButton(
-                            icon: Icon(Icons.cancel, color: Colors.red),
+                            icon: const Icon(Icons.cancel, color: Colors.red),
                             onPressed: () {
                               _handleApplicationStatus(
                                   applicationId, 'rejected');
@@ -352,14 +352,14 @@ class _ApplicationTabState extends State<ApplicationTab> {
                           ),
                         ] else if (status == 'applied') ...[
                           IconButton(
-                            icon: Icon(Icons.check_circle, color: Colors.green),
+                            icon: const Icon(Icons.check_circle, color: Colors.green),
                             onPressed: () {
                               _handleApplicationStatus(
                                   applicationId, 'accepted');
                             },
                           ),
                           IconButton(
-                            icon: Icon(Icons.cancel, color: Colors.red),
+                            icon: const Icon(Icons.cancel, color: Colors.red),
                             onPressed: () {
                               _handleApplicationStatus(
                                   applicationId, 'rejected');
@@ -367,7 +367,7 @@ class _ApplicationTabState extends State<ApplicationTab> {
                           ),
                         ] else if (status == 'rejected') ...[
                           IconButton(
-                            icon: Icon(Icons.check_circle, color: Colors.green),
+                            icon: const Icon(Icons.check_circle, color: Colors.green),
                             onPressed: () {
                               _handleApplicationStatus(
                                   applicationId, 'accepted');
@@ -389,19 +389,19 @@ class _ApplicationTabState extends State<ApplicationTab> {
   // Helper method to build detailed rows in the dialog
   Widget _buildDetailRow(String label, dynamic value) {
     if (value == null || value.toString().isEmpty) {
-      return SizedBox.shrink();
+      return const SizedBox.shrink();
     }
 
     return SingleChildScrollView(
       child: Column(
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 4),
+            padding: const EdgeInsets.symmetric(vertical: 4),
             child: Container(
               decoration: BoxDecoration(
-                color: Color.fromARGB(255, 204, 220, 231),
+                color: const Color.fromARGB(255, 204, 220, 231),
                 borderRadius: BorderRadius.circular(10),
-                boxShadow: [
+                boxShadow: const [
                   BoxShadow(
                     color: Color.fromARGB(255, 157, 174, 182),
                     blurRadius: 5,
@@ -410,12 +410,12 @@ class _ApplicationTabState extends State<ApplicationTab> {
                 ],
               ),
               child: Padding(
-                padding: EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(16.0),
                 child: Row(
                   children: [
                     Text(
                       '$label: ',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                      style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
                     Text(value.toString()),
                   ],
@@ -423,7 +423,7 @@ class _ApplicationTabState extends State<ApplicationTab> {
               ),
             ),
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
         ],
       ),
     );
@@ -437,7 +437,7 @@ class _ApplicationTabState extends State<ApplicationTab> {
         children: [
           Container(
             decoration: BoxDecoration(
-              color: Color.fromARGB(255, 206, 231, 247),
+              color: const Color.fromARGB(255, 206, 231, 247),
               borderRadius: BorderRadius.circular(10),
             ),
             child: TabBar(

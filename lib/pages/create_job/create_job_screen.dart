@@ -68,7 +68,7 @@ class _CreateJobScreenState extends State<CreateJobScreen> {
       _latitude = position.latitude;
       _longitude = position.longitude;
       _locationController.text =
-          '${_latitude}, ${_longitude}'; // Set location to latitude and longitude
+          '$_latitude, $_longitude'; // Set location to latitude and longitude
     });
   }
 
@@ -205,14 +205,14 @@ class _CreateJobScreenState extends State<CreateJobScreen> {
                         controller: _locationController,
                         decoration: InputDecoration(
                             labelText:
-                                _address != null ? _address : LocaleData.enterLocation.getString(context), // Update this line
+                                _address ?? LocaleData.enterLocation.getString(context), // Update this line
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10))),
                         readOnly: true,
                       ),
                     ),
                     IconButton(
-                      icon: Icon(Icons.location_on),
+                      icon: const Icon(Icons.location_on),
                       onPressed: _useGeolocation ? _getCurrentLocation : null,
                     ),
                   ],

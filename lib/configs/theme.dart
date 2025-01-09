@@ -22,7 +22,6 @@ final ThemeData lightTheme = ThemeData(
   colorScheme: const ColorScheme.light(
     primary: AppColors.royalBlue,
     secondary: AppColors.orange,
-    background: AppColors.white,
     surface: AppColors.lightGray,
     onPrimary: AppColors.white,
     onSecondary: AppColors.darkGray,
@@ -56,7 +55,6 @@ final ThemeData darkTheme = ThemeData(
   colorScheme: const ColorScheme.dark(
     primary: AppColors.royalBlue,
     secondary: AppColors.orange,
-    background: AppColors.black,
     surface: AppColors.darkGray,
     onPrimary: AppColors.white,
     onSecondary: AppColors.darkGray,

@@ -55,8 +55,8 @@ class _EmployerHomeScreenState extends State<EmployerHomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: Padding(
-          padding: const EdgeInsets.all(8.0),
+        leading: const Padding(
+          padding: EdgeInsets.all(8.0),
           child: Image(
             image: AssetImage(
               'assets/images/app_logo_placeholder.png',
@@ -72,7 +72,7 @@ class _EmployerHomeScreenState extends State<EmployerHomeScreen> {
         ),
         actions: [
           IconButton(
-            icon: Icon(Icons.notifications),
+            icon: const Icon(Icons.notifications),
             onPressed: () {
               Navigator.push(
                 context,
@@ -109,7 +109,7 @@ class _EmployerHomeScreenState extends State<EmployerHomeScreen> {
                   ),
                 ],
               ),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               Row(
                 children: [
                   Expanded(
@@ -128,13 +128,13 @@ class _EmployerHomeScreenState extends State<EmployerHomeScreen> {
                   ),
                 ],
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               GestureDetector(
                 onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => CreateJobScreen(),
+                      builder: (context) => const CreateJobScreen(),
                     ),
                   );
                 },
@@ -186,11 +186,11 @@ class _EmployerHomeScreenState extends State<EmployerHomeScreen> {
                                 ?.copyWith(
                                   fontWeight: FontWeight.bold,
                                   color:
-                                      Theme.of(context).colorScheme.background,
+                                      Theme.of(context).colorScheme.surface,
                                   fontSize: 18,
                                 ),
                           ),
-                          SizedBox(width: 16),
+                          const SizedBox(width: 16),
                           Container(
                             decoration: BoxDecoration(
                               color: Colors.white,
@@ -206,7 +206,7 @@ class _EmployerHomeScreenState extends State<EmployerHomeScreen> {
                                 ),
                                 child: Center(
                                   child: IconButton(
-                                    icon: Icon(
+                                    icon: const Icon(
                                       Icons.add,
                                       size: 32,
                                     ),
@@ -215,7 +215,7 @@ class _EmployerHomeScreenState extends State<EmployerHomeScreen> {
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) =>
-                                              CreateJobScreen(),
+                                              const CreateJobScreen(),
                                         ),
                                       );
                                     },
@@ -230,7 +230,7 @@ class _EmployerHomeScreenState extends State<EmployerHomeScreen> {
                   ],
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -255,7 +255,7 @@ class _EmployerHomeScreenState extends State<EmployerHomeScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => EmployerJobListScreen(),
+                            builder: (context) => const EmployerJobListScreen(),
                           ),
                         );
                       },
@@ -274,7 +274,7 @@ class _EmployerHomeScreenState extends State<EmployerHomeScreen> {
                               color: Colors.white70,
                               borderRadius: BorderRadius.circular(10),
                             ),
-                            child: Icon(
+                            child: const Icon(
                               Icons.arrow_forward_ios,
                               size: 12,
                             ),
@@ -285,8 +285,8 @@ class _EmployerHomeScreenState extends State<EmployerHomeScreen> {
                   )
                 ],
               ),
-              Container(child: EmployerJobListWidget()),
-              SizedBox(height: 16),
+              Container(child: const EmployerJobListWidget()),
+              const SizedBox(height: 16),
               // Row(
               //   children: [
               //     Expanded(

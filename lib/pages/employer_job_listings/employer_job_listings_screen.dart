@@ -34,7 +34,7 @@ class EmployerJobListScreen extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => CreateJobScreen(),
+                  builder: (context) => const CreateJobScreen(),
                 ),
               );
             },
@@ -158,7 +158,7 @@ class EmployerJobListScreen extends StatelessWidget {
                                         color: Colors.white,
                                       ),
                                       child: Text(
-                                        '${applicationsCount} ${LocaleData.applications.getString(context)}', // Update this line
+                                        '$applicationsCount ${LocaleData.applications.getString(context)}', // Update this line
                                         style: const TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 14,

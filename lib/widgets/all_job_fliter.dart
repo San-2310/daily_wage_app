@@ -15,7 +15,7 @@ class JobFilterWidget extends StatefulWidget {
 }
 
 class _JobFilterWidgetState extends State<JobFilterWidget> {
-  List<Job> _jobs = [];
+  final List<Job> _jobs = [];
   bool _isLoading = false;
   DocumentSnapshot? _lastDocument; // for pagination
   bool _hasMoreJobs = true;
@@ -150,20 +150,20 @@ class _JobFilterWidgetState extends State<JobFilterWidget> {
 
           // Job List
           _isLoading && _jobs.isEmpty
-              ? Center(child: CircularProgressIndicator())
+              ? const Center(child: CircularProgressIndicator())
               : _jobs.isEmpty
-                  ? Center(child: Text('No jobs found'))
+                  ? const Center(child: Text('No jobs found'))
                   : ListView.builder(
                       shrinkWrap:
                           true, // Ensures ListView doesn't take more space than needed
                       physics:
-                          NeverScrollableScrollPhysics(), // Prevent scrolling here as it's inside a scroll view
+                          const NeverScrollableScrollPhysics(), // Prevent scrolling here as it's inside a scroll view
                       itemCount: _jobs.length + (_hasMoreJobs ? 1 : 0),
                       itemBuilder: (context, index) {
                         if (index == _jobs.length) {
                           // Show loader at the bottom when more jobs are being fetched
                           _fetchJobs();
-                          return Center(child: CircularProgressIndicator());
+                          return const Center(child: CircularProgressIndicator());
                         }
                         final job = _jobs[index];
                         return GestureDetector(
@@ -210,14 +210,14 @@ class _JobFilterWidgetState extends State<JobFilterWidget> {
                                   );
                                 } else {
                                   ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
+                                    const SnackBar(
                                         content: Text(
                                             'Only employers can view job details.')),
                                   );
                                 }
                               } else {
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
+                                  const SnackBar(
                                       content: Text('User data not found.')),
                                 );
                               }
@@ -241,34 +241,34 @@ class _JobFilterWidgetState extends State<JobFilterWidget> {
                               children: [
                                 Text(
                                   job.jobTitle,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 18,
                                     color: Colors.white,
                                   ),
                                 ),
-                                SizedBox(height: 8),
+                                const SizedBox(height: 8),
                                 Text(
                                   job.jobDescription,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 14,
                                     color: Colors.white70,
                                   ),
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
                                 ),
-                                SizedBox(height: 8),
+                                const SizedBox(height: 8),
                                 Text(
                                   'Wage per Day: Rs.${job.wagePerDay}',
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 14,
                                     color: Colors.white,
                                   ),
                                 ),
-                                SizedBox(height: 8),
+                                const SizedBox(height: 8),
                                 Text(
                                   'Duration: ${job.duration} days',
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 14,
                                     color: Colors.white,
                                   ),

@@ -49,7 +49,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
       ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Please enable location services')));
+          const SnackBar(content: Text('Please enable location services')));
       return;
     }
 
@@ -59,7 +59,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       PermissionStatus status = await Permission.location.request();
       if (!status.isGranted) {
         ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Location permission denied')));
+            const SnackBar(content: Text('Location permission denied')));
         return;
       }
     }
@@ -76,7 +76,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Future<void> _signUp() async {
     if (_passwordController.text != _confirmPasswordController.text) {
       ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text("Passwords do not match")));
+          .showSnackBar(const SnackBar(content: Text("Passwords do not match")));
       return;
     }
 
@@ -99,9 +99,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
     if (error == null) {
       ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text("Sign up successful")));
+          .showSnackBar(const SnackBar(content: Text("Sign up successful")));
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (_) => LoginScreen()));
+          context, MaterialPageRoute(builder: (_) => const LoginScreen()));
     } else {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text("Error: $error")));
@@ -203,7 +203,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                             borderRadius:
                                                 BorderRadius.circular(10))))),
                             IconButton(
-                                icon: Icon(Icons.location_on),
+                                icon: const Icon(Icons.location_on),
                                 onPressed: _useGeolocation
                                     ? _getCurrentLocation
                                     : null),
@@ -333,7 +333,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => LoginScreen()));
+                                builder: (context) => const LoginScreen()));
                       },
                       child: Text(
                           LocaleData.logIn
@@ -344,7 +344,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   ],
                 ),
-                SizedBox(height: 80),
+                const SizedBox(height: 80),
               ],
             ),
           ),

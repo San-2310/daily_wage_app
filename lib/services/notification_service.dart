@@ -157,7 +157,7 @@ class NotificationService {
         .snapshots()
         .listen((snapshot) {
       for (var doc in snapshot.docs) {
-        var notificationData = doc.data() as Map<String, dynamic>;
+        var notificationData = doc.data();
         NotificationModel notification =
             NotificationModel.fromFirestore(notificationData);
 

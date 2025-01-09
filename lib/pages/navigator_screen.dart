@@ -12,6 +12,8 @@ import 'package:flutter_localization/flutter_localization.dart'; // Add this imp
 import '../localization/locales.dart'; // Add this import
 
 class NavigatorScreen extends StatefulWidget {
+  const NavigatorScreen({super.key});
+
   @override
   _NavigatorScreenState createState() => _NavigatorScreenState();
 }
@@ -22,7 +24,7 @@ class _NavigatorScreenState extends State<NavigatorScreen> {
   // List of pages for each BottomNavigationBar item
   final List<Widget> _pages = [
     FirebaseAuth.instance.currentUser?.uid == null
-        ? Scaffold(
+        ? const Scaffold(
             backgroundColor: Colors.red) // Placeholder for loading or error
         : FutureBuilder<DocumentSnapshot>(
             future: FirebaseFirestore.instance
@@ -31,13 +33,13 @@ class _NavigatorScreenState extends State<NavigatorScreen> {
                 .get(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return Scaffold(
+                return const Scaffold(
                   backgroundColor: Colors.blue,
                   body: Center(child: CircularProgressIndicator()),
                 ); // Show loading indicator while fetching data
               }
               if (snapshot.hasError || !snapshot.hasData) {
-                return Scaffold(
+                return const Scaffold(
                   backgroundColor: Colors.red,
                   body: Center(child: Text('Error or No Data')),
                 ); // Show error if data fetch fails
@@ -45,14 +47,14 @@ class _NavigatorScreenState extends State<NavigatorScreen> {
               final userRole =
                   snapshot.data?['role'] ?? 'worker'; // Default to 'worker'
               if (userRole == 'employer') {
-                return EmployerHomeScreen(); // If role is employer, show employer home screen
+                return const EmployerHomeScreen(); // If role is employer, show employer home screen
               } else {
-                return WorkerHomeScreen(); // If role is worker, show worker home screen
+                return const WorkerHomeScreen(); // If role is worker, show worker home screen
               }
             },
           ),
     FirebaseAuth.instance.currentUser?.uid == null
-        ? Scaffold(
+        ? const Scaffold(
             backgroundColor: Colors.red) // Placeholder for loading or error
         : FutureBuilder<DocumentSnapshot>(
             future: FirebaseFirestore.instance
@@ -61,13 +63,13 @@ class _NavigatorScreenState extends State<NavigatorScreen> {
                 .get(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return Scaffold(
+                return const Scaffold(
                   backgroundColor: Colors.blue,
                   body: Center(child: CircularProgressIndicator()),
                 ); // Show loading indicator while fetching data
               }
               if (snapshot.hasError || !snapshot.hasData) {
-                return Scaffold(
+                return const Scaffold(
                   backgroundColor: Colors.red,
                   body: Center(child: Text('Error or No Data')),
                 ); // Show error if data fetch fails
@@ -75,9 +77,9 @@ class _NavigatorScreenState extends State<NavigatorScreen> {
               final userRole =
                   snapshot.data?['role'] ?? 'worker'; // Default to 'worker'
               if (userRole == 'employer') {
-                return EmployerJobListScreen(); // If role is employer, show employer home screen
+                return const EmployerJobListScreen(); // If role is employer, show employer home screen
               } else {
-                return WorkerJobListScreen(); // If role is worker, show worker home screen
+                return const WorkerJobListScreen(); // If role is worker, show worker home screen
               }
             },
           ),
@@ -110,19 +112,19 @@ class _NavigatorScreenState extends State<NavigatorScreen> {
             onTap: _onItemTapped,
             items: [
               BottomNavigationBarItem(
-                icon: Icon(Icons.home),
+                icon: const Icon(Icons.home),
                 label: LocaleData.home.getString(context), // Update this line
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.medical_services_outlined),
+                icon: const Icon(Icons.medical_services_outlined),
                 label: LocaleData.jobs.getString(context), // Update this line
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.person),
+                icon: const Icon(Icons.person),
                 label: LocaleData.profile.getString(context), // Update this line
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.settings),
+                icon: const Icon(Icons.settings),
                 label: LocaleData.settings.getString(context), // Update this line
               ),
             ],

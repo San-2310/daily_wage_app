@@ -105,7 +105,7 @@ Future<void> ensureIdFieldsInFirestore() async {
 
 // Main application widget
 class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   State<MyApp> createState() => _MyAppState();

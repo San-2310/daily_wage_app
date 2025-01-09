@@ -14,9 +14,9 @@ class WorkerJobDetailsScreen extends StatefulWidget {
   final String jobId;
 
   const WorkerJobDetailsScreen({
-    Key? key,
+    super.key,
     required this.jobId,
-  }) : super(key: key);
+  });
 
   @override
   State<WorkerJobDetailsScreen> createState() => _WorkerJobDetailsScreenState();
@@ -95,7 +95,7 @@ class _WorkerJobDetailsScreenState extends State<WorkerJobDetailsScreen> {
 
     if (currentUser == null) {
       ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text('User not logged in')));
+          .showSnackBar(const SnackBar(content: Text('User not logged in')));
       return;
     }
 
@@ -111,7 +111,7 @@ class _WorkerJobDetailsScreenState extends State<WorkerJobDetailsScreen> {
     if (error == null) {
       setState(() {});
       ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('${LocaleData.ratingSubmittedSuccessfully.getString(context)}'))); // Update this line
+          SnackBar(content: Text(LocaleData.ratingSubmittedSuccessfully.getString(context)))); // Update this line
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('${LocaleData.errorSubmittingRating.getString(context)} $error'))); // Update this line
@@ -298,7 +298,7 @@ class _WorkerJobDetailsScreenState extends State<WorkerJobDetailsScreen> {
                           ),
                           child: Text(
                             LocaleData.rateEmployer.getString(context), // Update this line
-                            style: TextStyle(fontSize: 16, color: Colors.white),
+                            style: const TextStyle(fontSize: 16, color: Colors.white),
                           ),
                         ),
                         const SizedBox(height: 10),
@@ -310,7 +310,7 @@ class _WorkerJobDetailsScreenState extends State<WorkerJobDetailsScreen> {
                           ),
                           child: Text(
                             '${LocaleData.applied.getString(context)} (${LocaleData.accepted.getString(context)})', // Update this line
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 16,
                               color: Colors.black,
                             ),
@@ -328,7 +328,7 @@ class _WorkerJobDetailsScreenState extends State<WorkerJobDetailsScreen> {
                     ),
                     child: Text(
                       '${LocaleData.applied.getString(context)} (${application.status ?? LocaleData.unknown.getString(context)})', // Update this line
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 16,
                         color: Colors.black,
                       ),
@@ -347,7 +347,7 @@ class _WorkerJobDetailsScreenState extends State<WorkerJobDetailsScreen> {
                   ),
                   child: Text(
                     LocaleData.applyNow.getString(context), // Update this line
-                    style: TextStyle(fontSize: 16, color: Colors.white),
+                    style: const TextStyle(fontSize: 16, color: Colors.white),
                   ),
                 );
               },
@@ -399,7 +399,7 @@ class _WorkerJobDetailsScreenState extends State<WorkerJobDetailsScreen> {
                 child: Text(detail),
               ),
             )
-            .toList(),
+            ,
       ],
     );
   }

@@ -74,7 +74,7 @@ class _EmployerJobDetailsScreenState extends State<EmployerJobDetailsScreen>
             _latitude = location['latitude'];
             _longitude = location['longitude'];
             _locationController.text =
-                '${_latitude}, ${_longitude}'; // Display latitude and longitude
+                '$_latitude, $_longitude'; // Display latitude and longitude
           }
         }
       }
@@ -184,7 +184,7 @@ class _EmployerJobDetailsScreenState extends State<EmployerJobDetailsScreen>
                   ],
                 ),
                 const SizedBox(height: 20),
-                Container(
+                SizedBox(
                   height: 840,
                   child: TabBarView(
                     controller: _tabController,
@@ -287,14 +287,14 @@ class _EmployerJobDetailsScreenState extends State<EmployerJobDetailsScreen>
                     controller: _locationController,
                     decoration: InputDecoration(
                         labelText:
-                            _address != null ? _address : LocaleData.enterLocation.getString(context), // Update this line
+                            _address ?? LocaleData.enterLocation.getString(context), // Update this line
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10))),
                     readOnly: true,
                   ),
                 ),
                 IconButton(
-                  icon: Icon(Icons.location_on),
+                  icon: const Icon(Icons.location_on),
                   onPressed: _useGeolocation ? _getCurrentLocation : null,
                 ),
               ],
@@ -385,7 +385,7 @@ class _EmployerJobDetailsScreenState extends State<EmployerJobDetailsScreen>
   Widget _buildDetailRow(String label, dynamic value) {
     // Only show the label and value if the value is not null
     if (value == null || value.toString().isEmpty) {
-      return SizedBox
+      return const SizedBox
           .shrink(); // Don't display anything if the value is null or empty
     }
 
@@ -412,7 +412,7 @@ class _EmployerJobDetailsScreenState extends State<EmployerJobDetailsScreen>
                   children: [
                     Text(
                       '$label: ',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                      style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
                     Text(value.toString()),
                   ],
@@ -420,7 +420,7 @@ class _EmployerJobDetailsScreenState extends State<EmployerJobDetailsScreen>
               ),
             ),
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
         ],
       ),
     );
@@ -456,7 +456,7 @@ class _EmployerJobDetailsScreenState extends State<EmployerJobDetailsScreen>
       _latitude = position.latitude;
       _longitude = position.longitude;
       _locationController.text =
-          '${_latitude}, ${_longitude}'; // Set location to latitude and longitude
+          '$_latitude, $_longitude'; // Set location to latitude and longitude
     });
   }
 }

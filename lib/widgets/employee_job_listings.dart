@@ -56,7 +56,7 @@ class _EmployerJobListWidgetState extends State<EmployerJobListWidget> {
   @override
   Widget build(BuildContext context) {
     return _jobs.isEmpty
-        ? Center() // Loading indicator
+        ? const Center() // Loading indicator
         : Padding(
             padding: const EdgeInsets.all(8.0),
             child: SingleChildScrollView(
@@ -80,12 +80,12 @@ class _EmployerJobListWidgetState extends State<EmployerJobListWidget> {
                                 Container(
                                   width: double.infinity,
                                   height: 120,
-                                  margin: EdgeInsets.only(right: 10),
+                                  margin: const EdgeInsets.only(right: 10),
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
                                     color: jobColor,
                                   ),
-                                  padding: EdgeInsets.all(10),
+                                  padding: const EdgeInsets.all(10),
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -93,16 +93,16 @@ class _EmployerJobListWidgetState extends State<EmployerJobListWidget> {
                                     children: [
                                       Text(
                                         job.jobTitle,
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 18,
                                           color: Colors.white,
                                         ),
                                       ),
-                                      SizedBox(height: 5),
+                                      const SizedBox(height: 5),
                                       Text(
                                         job.jobDescription,
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           fontSize: 14,
                                           color: Colors.white70,
                                         ),
@@ -140,7 +140,7 @@ class _EmployerJobListWidgetState extends State<EmployerJobListWidget> {
                                 ),
                               ],
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 8,
                             ),
                           ],

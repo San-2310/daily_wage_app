@@ -6,6 +6,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../localization/locales.dart'; // Add this import
 
 class SettingsScreen extends StatefulWidget {
+  const SettingsScreen({super.key});
+
   @override
   _SettingsScreenState createState() => _SettingsScreenState();
 }
@@ -55,7 +57,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     }
 
     setState(() {
-      _currentLocale = value!;
+      _currentLocale = value;
     });
   }
 
@@ -67,7 +69,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         appBar: AppBar(
           title: Text(LocaleData.settings.getString(context)), // Update this line
         ),
-        body: Center(
+        body: const Center(
           child: CircularProgressIndicator(), // Show loading spinner
         ),
       );

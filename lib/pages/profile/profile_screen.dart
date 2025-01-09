@@ -15,6 +15,8 @@ import 'package:flutter_localization/flutter_localization.dart'; // Add this imp
 import '../../localization/locales.dart'; // Add this import
 
 class ProfileScreen extends StatefulWidget {
+  const ProfileScreen({super.key});
+
   @override
   _ProfileScreenState createState() => _ProfileScreenState();
 }
@@ -24,7 +26,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     await AuthServices().logOut();
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => LoginScreen()),
+      MaterialPageRoute(builder: (context) => const LoginScreen()),
     );
   }
 
@@ -86,8 +88,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   // Pick a profile image from the gallery
   Future<void> _pickProfileImage() async {
-    final ImagePicker _picker = ImagePicker();
-    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+    final ImagePicker picker = ImagePicker();
+    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
 
     if (image != null) {
       setState(() {
@@ -166,7 +168,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         title: Text(LocaleData.profile.getString(context)), // Update this line
         actions: [
           IconButton(
-            icon: Icon(Icons.logout),
+            icon: const Icon(Icons.logout),
             onPressed: _logout,
           ),
         ],
@@ -183,22 +185,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   backgroundImage:
                       _profileImage != null ? FileImage(_profileImage!) : null,
                   child: _profileImage == null
-                      ? Icon(Icons.add_a_photo, size: 50)
+                      ? const Icon(Icons.add_a_photo, size: 50)
                       : null,
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               _buildEditableField(LocaleData.name.getString(context), _nameController, _nameFocusNode), // Update this line
-              SizedBox(height: 15),
+              const SizedBox(height: 15),
               _buildUneditableField(LocaleData.email.getString(context), _emailController, _emailFocusNode), // Update this line
-              SizedBox(height: 15),
+              const SizedBox(height: 15),
               _buildEditableField(LocaleData.phone.getString(context), _phoneController, _phoneFocusNode), // Update this line
-              SizedBox(height: 15),
+              const SizedBox(height: 15),
               _buildLocationField(),
-              SizedBox(height: 15),
+              const SizedBox(height: 15),
               _buildUneditableField(LocaleData.role.getString(context), // Update this line
                   TextEditingController()..text = _role, _roleFocusNode),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: _saveProfile,
                 child: Text(LocaleData.saveChanges.getString(context)), // Update this line
@@ -216,9 +218,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: TextStyle(fontWeight: FontWeight.bold)),
+        Text(label, style: const TextStyle(fontWeight: FontWeight.bold)),
         Container(
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             border: Border.all(
@@ -229,7 +231,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           child: TextField(
             controller: controller,
             focusNode: focusNode,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               border: InputBorder.none,
             ),
           ),
@@ -244,9 +246,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: TextStyle(fontWeight: FontWeight.bold)),
+        Text(label, style: const TextStyle(fontWeight: FontWeight.bold)),
         Container(
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             border: Border.all(
@@ -259,7 +261,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             controller: controller,
             enabled: false,
             focusNode: focusNode,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               border: InputBorder.none,
             ),
           ),
@@ -273,12 +275,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(LocaleData.location.getString(context), style: TextStyle(fontWeight: FontWeight.bold)), // Update this line
+        Text(LocaleData.location.getString(context), style: const TextStyle(fontWeight: FontWeight.bold)), // Update this line
         Row(
           children: [
             Expanded(
               child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   border: Border.all(color: Colors.grey.shade300),
@@ -293,7 +295,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ),
             IconButton(
-              icon: Icon(Icons.location_on),
+              icon: const Icon(Icons.location_on),
               onPressed: _useGeolocation ? _getCurrentLocation : null,
             ),
           ],

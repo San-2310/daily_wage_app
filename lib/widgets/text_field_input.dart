@@ -7,12 +7,12 @@ class TextFieldInput extends StatelessWidget {
   final TextInputType textInputType;
 
   const TextFieldInput({
-    Key? key,
+    super.key,
     required this.hintText,
     this.isPass = false,
     required this.textEditingController,
     required this.textInputType,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class TextFieldInput extends StatelessWidget {
               theme.colorScheme.onSurface.withOpacity(0.6), // Subtle hint color
         ),
         filled: true,
-        fillColor: theme.colorScheme.surfaceVariant, // Use theme for background
+        fillColor: theme.colorScheme.surfaceContainerHighest, // Use theme for background
         contentPadding:
             const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
         border: OutlineInputBorder(

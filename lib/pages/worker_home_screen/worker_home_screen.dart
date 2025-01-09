@@ -57,8 +57,8 @@ class _WorkerHomeScreenState extends State<WorkerHomeScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        leading: Padding(
-          padding: const EdgeInsets.all(8.0),
+        leading: const Padding(
+          padding: EdgeInsets.all(8.0),
           child: Image(
             image: AssetImage(
               'assets/images/app_logo_placeholder.png',
@@ -74,7 +74,7 @@ class _WorkerHomeScreenState extends State<WorkerHomeScreen> {
         ),
         actions: [
           IconButton(
-            icon: Icon(Icons.notifications),
+            icon: const Icon(Icons.notifications),
             onPressed: () {
               Navigator.push(
                 context,
@@ -107,7 +107,7 @@ class _WorkerHomeScreenState extends State<WorkerHomeScreen> {
                   ),
                 ],
               ),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               Row(
                 children: [
                   Expanded(
@@ -124,7 +124,7 @@ class _WorkerHomeScreenState extends State<WorkerHomeScreen> {
                   ),
                 ],
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -147,7 +147,7 @@ class _WorkerHomeScreenState extends State<WorkerHomeScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => WorkerJobListScreen(),
+                            builder: (context) => const WorkerJobListScreen(),
                           ),
                         );
                       },
@@ -165,7 +165,7 @@ class _WorkerHomeScreenState extends State<WorkerHomeScreen> {
                               color: Colors.white70,
                               borderRadius: BorderRadius.circular(10),
                             ),
-                            child: Icon(
+                            child: const Icon(
                               Icons.arrow_forward_ios,
                               size: 12,
                             ),
@@ -176,7 +176,7 @@ class _WorkerHomeScreenState extends State<WorkerHomeScreen> {
                   ),
                 ],
               ),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               // Using StreamBuilder to listen to real-time updates
               StreamBuilder<QuerySnapshot>(
                 stream: FirebaseFirestore.instance
@@ -185,7 +185,7 @@ class _WorkerHomeScreenState extends State<WorkerHomeScreen> {
                     .snapshots(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return CircularProgressIndicator();
+                    return const CircularProgressIndicator();
                   }
 
                   if (!snapshot.hasData ||
@@ -238,7 +238,7 @@ class _WorkerHomeScreenState extends State<WorkerHomeScreen> {
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold,
                                   color:
-                                      Theme.of(context).colorScheme.background,
+                                      Theme.of(context).colorScheme.surface,
                                 ),
                               ),
                               Text(
@@ -246,7 +246,7 @@ class _WorkerHomeScreenState extends State<WorkerHomeScreen> {
                                 style: TextStyle(
                                   fontSize: 14,
                                   color:
-                                      Theme.of(context).colorScheme.background,
+                                      Theme.of(context).colorScheme.surface,
                                 ),
                               ),
                             ],
@@ -276,7 +276,7 @@ class _WorkerHomeScreenState extends State<WorkerHomeScreen> {
                           builder: (context, jobSnapshot) {
                             if (jobSnapshot.connectionState ==
                                 ConnectionState.waiting) {
-                              return CircularProgressIndicator();
+                              return const CircularProgressIndicator();
                             }
 
                             if (jobSnapshot.hasData) {
@@ -311,16 +311,16 @@ class _WorkerHomeScreenState extends State<WorkerHomeScreen> {
                                       children: [
                                         Text(
                                           jobData['jobTitle'],
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             fontWeight: FontWeight.bold,
                                             color: Colors.white,
                                             fontSize: 14,
                                           ),
                                         ),
-                                        SizedBox(height: 8),
+                                        const SizedBox(height: 8),
                                         Text(
                                           application['status'],
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             color: Colors.white70,
                                             fontSize: 12,
                                           ),
@@ -331,7 +331,7 @@ class _WorkerHomeScreenState extends State<WorkerHomeScreen> {
                                 ),
                               );
                             } else {
-                              return SizedBox.shrink();
+                              return const SizedBox.shrink();
                             }
                           },
                         );
@@ -340,7 +340,7 @@ class _WorkerHomeScreenState extends State<WorkerHomeScreen> {
                   );
                 },
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -354,7 +354,7 @@ class _WorkerHomeScreenState extends State<WorkerHomeScreen> {
                   ),
                 ],
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Row(
                 children: [
                   Expanded(
@@ -371,8 +371,8 @@ class _WorkerHomeScreenState extends State<WorkerHomeScreen> {
                   ),
                 ],
               ),
-              JobFilterWidget(),
-              SizedBox(height: 16),
+              const JobFilterWidget(),
+              const SizedBox(height: 16),
             ],
           ),
         ),

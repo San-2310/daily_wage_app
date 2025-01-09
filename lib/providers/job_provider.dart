@@ -6,7 +6,7 @@ import '../models/job_model.dart';
 
 class JobProvider extends ChangeNotifier {
   List<Job> _jobs = [];
-  Map<String, int> _applicationsCount = {};
+  final Map<String, int> _applicationsCount = {};
 
   List<Job> get jobs => _jobs;
   Map<String, int> get applicationsCount => _applicationsCount;
@@ -26,7 +26,7 @@ class JobProvider extends ChangeNotifier {
         .listen((snapshot) {
       _jobs = snapshot.docs
           .map((doc) =>
-              Job.fromFirestore(doc.data() as Map<String, dynamic>, doc.id))
+              Job.fromFirestore(doc.data(), doc.id))
           .toList();
 
       _updateApplicationCounts();
