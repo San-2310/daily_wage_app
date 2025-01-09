@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:daily_wage_app/widgets/applications_tab.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localization/flutter_localization.dart'; // Add this import
 import 'package:geolocator/geolocator.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:flutter_localization/flutter_localization.dart'; // Add this import
 
 import '../../localization/locales.dart'; // Add this import
 
@@ -80,7 +80,8 @@ class _EmployerJobDetailsScreenState extends State<EmployerJobDetailsScreen>
       }
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text(LocaleData.errorFetchingJobDetails.getString(context)), // Update this line
+        content: Text(LocaleData.errorFetchingJobDetails
+            .getString(context)), // Update this line
       ));
     }
   }
@@ -110,11 +111,13 @@ class _EmployerJobDetailsScreenState extends State<EmployerJobDetailsScreen>
           .doc(widget.jobId)
           .update(updatedJob);
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text(LocaleData.jobUpdatedSuccessfully.getString(context)), // Update this line
+        content: Text(LocaleData.jobUpdatedSuccessfully
+            .getString(context)), // Update this line
       ));
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text('${LocaleData.errorUpdatingJob.getString(context)} $e'), // Update this line
+        content: Text(
+            '${LocaleData.errorUpdatingJob.getString(context)} $e'), // Update this line
       ));
     } finally {
       setState(() {
@@ -135,12 +138,14 @@ class _EmployerJobDetailsScreenState extends State<EmployerJobDetailsScreen>
           .doc(widget.jobId)
           .delete();
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text(LocaleData.jobDeletedSuccessfully.getString(context)), // Update this line
+        content: Text(LocaleData.jobDeletedSuccessfully
+            .getString(context)), // Update this line
       ));
       Navigator.pop(context);
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text('${LocaleData.errorDeletingJob.getString(context)} $e'), // Update this line
+        content: Text(
+            '${LocaleData.errorDeletingJob.getString(context)} $e'), // Update this line
       ));
     } finally {
       setState(() {
@@ -164,10 +169,10 @@ class _EmployerJobDetailsScreenState extends State<EmployerJobDetailsScreen>
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
     return Scaffold(
-      appBar: AppBar(title: Text(LocaleData.jobDetails.getString(context))), // Update this line
+      appBar: AppBar(
+          title: Text(
+              LocaleData.jobDetails.getString(context))), // Update this line
       body: SingleChildScrollView(
         child: SafeArea(
           child: Container(
@@ -179,8 +184,12 @@ class _EmployerJobDetailsScreenState extends State<EmployerJobDetailsScreen>
                 TabBar(
                   controller: _tabController,
                   tabs: [
-                    Tab(text: LocaleData.jobDetails.getString(context)), // Update this line
-                    Tab(text: LocaleData.applications.getString(context)), // Update this line
+                    Tab(
+                        text: LocaleData.jobDetails
+                            .getString(context)), // Update this line
+                    Tab(
+                        text: LocaleData.applications
+                            .getString(context)), // Update this line
                   ],
                 ),
                 const SizedBox(height: 20),
@@ -212,7 +221,8 @@ class _EmployerJobDetailsScreenState extends State<EmployerJobDetailsScreen>
             TextField(
               controller: _jobTitleController,
               decoration: InputDecoration(
-                  labelText: LocaleData.jobTitle.getString(context), // Update this line
+                  labelText: LocaleData.jobTitle
+                      .getString(context), // Update this line
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10))),
             ),
@@ -220,7 +230,8 @@ class _EmployerJobDetailsScreenState extends State<EmployerJobDetailsScreen>
             TextField(
               controller: _jobDescriptionController,
               decoration: InputDecoration(
-                  labelText: LocaleData.jobDescription.getString(context), // Update this line
+                  labelText: LocaleData.jobDescription
+                      .getString(context), // Update this line
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10))),
             ),
@@ -229,7 +240,8 @@ class _EmployerJobDetailsScreenState extends State<EmployerJobDetailsScreen>
               controller: _numWorkersController,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
-                  labelText: LocaleData.numWorkers.getString(context), // Update this line
+                  labelText: LocaleData.numWorkers
+                      .getString(context), // Update this line
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10))),
             ),
@@ -238,7 +250,8 @@ class _EmployerJobDetailsScreenState extends State<EmployerJobDetailsScreen>
               controller: _wagePerDayController,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
-                  labelText: LocaleData.wagePerDay.getString(context), // Update this line
+                  labelText: LocaleData.wagePerDay
+                      .getString(context), // Update this line
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10))),
             ),
@@ -247,7 +260,8 @@ class _EmployerJobDetailsScreenState extends State<EmployerJobDetailsScreen>
               controller: _durationController,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
-                  labelText: LocaleData.duration.getString(context), // Update this line
+                  labelText: LocaleData.duration
+                      .getString(context), // Update this line
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10))),
             ),
@@ -255,7 +269,8 @@ class _EmployerJobDetailsScreenState extends State<EmployerJobDetailsScreen>
             TextField(
               controller: _categoryController,
               decoration: InputDecoration(
-                  labelText: LocaleData.category.getString(context), // Update this line
+                  labelText: LocaleData.category
+                      .getString(context), // Update this line
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10))),
             ),
@@ -286,8 +301,9 @@ class _EmployerJobDetailsScreenState extends State<EmployerJobDetailsScreen>
                   child: TextField(
                     controller: _locationController,
                     decoration: InputDecoration(
-                        labelText:
-                            _address ?? LocaleData.enterLocation.getString(context), // Update this line
+                        labelText: _address ??
+                            LocaleData.enterLocation
+                                .getString(context), // Update this line
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10))),
                     readOnly: true,
@@ -300,7 +316,8 @@ class _EmployerJobDetailsScreenState extends State<EmployerJobDetailsScreen>
               ],
             ),
             SwitchListTile(
-              title: Text(LocaleData.useGeolocation.getString(context)), // Update this line
+              title: Text(LocaleData.useGeolocation
+                  .getString(context)), // Update this line
               value: _useGeolocation,
               onChanged: (bool value) {
                 setState(() {
@@ -331,7 +348,8 @@ class _EmployerJobDetailsScreenState extends State<EmployerJobDetailsScreen>
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Text(
-                                LocaleData.deleteJob.getString(context), // Update this line
+                                LocaleData.deleteJob
+                                    .getString(context), // Update this line
                                 style: Theme.of(context)
                                     .textTheme
                                     .bodyLarge
@@ -360,7 +378,8 @@ class _EmployerJobDetailsScreenState extends State<EmployerJobDetailsScreen>
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Text(
-                                LocaleData.updateJob.getString(context), // Update this line
+                                LocaleData.updateJob
+                                    .getString(context), // Update this line
                                 style: Theme.of(context)
                                     .textTheme
                                     .bodyLarge
@@ -428,13 +447,13 @@ class _EmployerJobDetailsScreenState extends State<EmployerJobDetailsScreen>
 
   Future<void> _getCurrentLocation() async {
     bool serviceEnabled;
-    LocationPermission permission;
 
     // Check if location services are enabled
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
-      ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(LocaleData.enableLocationServices.getString(context)))); // Update this line
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(LocaleData.enableLocationServices
+              .getString(context)))); // Update this line
       return;
     }
 
@@ -443,8 +462,9 @@ class _EmployerJobDetailsScreenState extends State<EmployerJobDetailsScreen>
     if (status.isDenied || status.isPermanentlyDenied) {
       PermissionStatus status = await Permission.location.request();
       if (!status.isGranted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(LocaleData.locationPermissionDenied.getString(context)))); // Update this line
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text(LocaleData.locationPermissionDenied
+                .getString(context)))); // Update this line
         return;
       }
     }

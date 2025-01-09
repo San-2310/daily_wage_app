@@ -60,7 +60,9 @@ class _WorkerJobDetailsScreenState extends State<WorkerJobDetailsScreen> {
       }
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('${LocaleData.errorFetchingWorkerData.getString(context)} $e')), // Update this line
+        SnackBar(
+            content: Text(
+                '${LocaleData.errorFetchingWorkerData.getString(context)} $e')), // Update this line
       );
     }
   }
@@ -84,7 +86,9 @@ class _WorkerJobDetailsScreenState extends State<WorkerJobDetailsScreen> {
       }
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('${LocaleData.errorFetchingJobDetails.getString(context)} $e')), // Update this line
+        SnackBar(
+            content: Text(
+                '${LocaleData.errorFetchingJobDetails.getString(context)} $e')), // Update this line
       );
     }
   }
@@ -110,11 +114,13 @@ class _WorkerJobDetailsScreenState extends State<WorkerJobDetailsScreen> {
     String? error = await _ratingServices.addOrUpdateRating(ratingObj);
     if (error == null) {
       setState(() {});
-      ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(LocaleData.ratingSubmittedSuccessfully.getString(context)))); // Update this line
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(LocaleData.ratingSubmittedSuccessfully
+              .getString(context)))); // Update this line
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('${LocaleData.errorSubmittingRating.getString(context)} $error'))); // Update this line
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(
+              '${LocaleData.errorSubmittingRating.getString(context)} $error'))); // Update this line
     }
   }
 
@@ -126,7 +132,8 @@ class _WorkerJobDetailsScreenState extends State<WorkerJobDetailsScreen> {
         return StatefulBuilder(
           builder: (BuildContext context, setDialogState) {
             return AlertDialog(
-              title: Text(LocaleData.rateEmployer.getString(context)), // Update this line
+              title: Text(LocaleData.rateEmployer
+                  .getString(context)), // Update this line
               content: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -153,7 +160,8 @@ class _WorkerJobDetailsScreenState extends State<WorkerJobDetailsScreen> {
                       );
                     }),
                   ),
-                  Text('${LocaleData.rating.getString(context)}: $selectedRating'), // Update this line
+                  Text(
+                      '${LocaleData.rating.getString(context)}: $selectedRating'), // Update this line
                 ],
               ),
               actions: <Widget>[
@@ -161,14 +169,16 @@ class _WorkerJobDetailsScreenState extends State<WorkerJobDetailsScreen> {
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  child: Text(LocaleData.cancel.getString(context)), // Update this line
+                  child: Text(
+                      LocaleData.cancel.getString(context)), // Update this line
                 ),
                 TextButton(
                   onPressed: () {
                     Navigator.of(context).pop();
                     _submitRating(_jobDetails!['employerId']);
                   },
-                  child: Text(LocaleData.submit.getString(context)), // Update this line
+                  child: Text(
+                      LocaleData.submit.getString(context)), // Update this line
                 ),
               ],
             );
@@ -201,7 +211,8 @@ class _WorkerJobDetailsScreenState extends State<WorkerJobDetailsScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(LocaleData.jobDetails.getString(context)), // Update this line
+        title:
+            Text(LocaleData.jobDetails.getString(context)), // Update this line
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
@@ -209,7 +220,8 @@ class _WorkerJobDetailsScreenState extends State<WorkerJobDetailsScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              _jobDetails!['jobTitle'] ?? LocaleData.jobTitle.getString(context), // Update this line
+              _jobDetails!['jobTitle'] ??
+                  LocaleData.jobTitle.getString(context), // Update this line
               style: theme.textTheme.headlineSmall,
             ),
             const SizedBox(height: 10),
@@ -263,7 +275,10 @@ class _WorkerJobDetailsScreenState extends State<WorkerJobDetailsScreen> {
             // Description Section
             _buildDetailsSection(
               LocaleData.jobDescription.getString(context), // Update this line
-              [_jobDetails!['jobDescription'] ?? LocaleData.noDescriptionAvailable.getString(context)], // Update this line
+              [
+                _jobDetails!['jobDescription'] ??
+                    LocaleData.noDescriptionAvailable.getString(context)
+              ], // Update this line
             ),
             const SizedBox(height: 30),
 
@@ -297,8 +312,10 @@ class _WorkerJobDetailsScreenState extends State<WorkerJobDetailsScreen> {
                             minimumSize: const Size(double.infinity, 50),
                           ),
                           child: Text(
-                            LocaleData.rateEmployer.getString(context), // Update this line
-                            style: const TextStyle(fontSize: 16, color: Colors.white),
+                            LocaleData.rateEmployer
+                                .getString(context), // Update this line
+                            style: const TextStyle(
+                                fontSize: 16, color: Colors.white),
                           ),
                         ),
                         const SizedBox(height: 10),
@@ -327,7 +344,7 @@ class _WorkerJobDetailsScreenState extends State<WorkerJobDetailsScreen> {
                       minimumSize: const Size(double.infinity, 50),
                     ),
                     child: Text(
-                      '${LocaleData.applied.getString(context)} (${application.status ?? LocaleData.unknown.getString(context)})', // Update this line
+                      '${LocaleData.applied.getString(context)} (${application.status})',
                       style: const TextStyle(
                         fontSize: 16,
                         color: Colors.black,
@@ -374,11 +391,15 @@ class _WorkerJobDetailsScreenState extends State<WorkerJobDetailsScreen> {
           _jobDetails!['employerId'], _jobDetails!['jobTitle'], _worker!.name);
 
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(LocaleData.applicationSubmittedSuccessfully.getString(context))), // Update this line
+        SnackBar(
+            content: Text(LocaleData.applicationSubmittedSuccessfully
+                .getString(context))), // Update this line
       );
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('${LocaleData.errorSubmittingApplication.getString(context)} $e')), // Update this line
+        SnackBar(
+            content: Text(
+                '${LocaleData.errorSubmittingApplication.getString(context)} $e')), // Update this line
       );
     }
   }
@@ -392,14 +413,12 @@ class _WorkerJobDetailsScreenState extends State<WorkerJobDetailsScreen> {
           title,
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
-        ...details
-            .map(
-              (detail) => Padding(
-                padding: const EdgeInsets.symmetric(vertical: 5.0),
-                child: Text(detail),
-              ),
-            )
-            ,
+        ...details.map(
+          (detail) => Padding(
+            padding: const EdgeInsets.symmetric(vertical: 5.0),
+            child: Text(detail),
+          ),
+        ),
       ],
     );
   }

@@ -195,7 +195,7 @@ class _ApplicationTabState extends State<ApplicationTab> {
                   .getString(context))); // Update this line
         }
 
-        List<Map<String, dynamic>> applications = [];
+        //List<Map<String, dynamic>> applications = [];
 
         Future<List<Map<String, dynamic>>> fetchApplications() async {
           List<Map<String, dynamic>> applicationsWithWorkerNames = [];
@@ -352,7 +352,8 @@ class _ApplicationTabState extends State<ApplicationTab> {
                           ),
                         ] else if (status == 'applied') ...[
                           IconButton(
-                            icon: const Icon(Icons.check_circle, color: Colors.green),
+                            icon: const Icon(Icons.check_circle,
+                                color: Colors.green),
                             onPressed: () {
                               _handleApplicationStatus(
                                   applicationId, 'accepted');
@@ -367,7 +368,8 @@ class _ApplicationTabState extends State<ApplicationTab> {
                           ),
                         ] else if (status == 'rejected') ...[
                           IconButton(
-                            icon: const Icon(Icons.check_circle, color: Colors.green),
+                            icon: const Icon(Icons.check_circle,
+                                color: Colors.green),
                             onPressed: () {
                               _handleApplicationStatus(
                                   applicationId, 'accepted');

@@ -43,7 +43,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   // Function to get current location using geolocator
   Future<void> _getCurrentLocation() async {
     bool serviceEnabled;
-    LocationPermission permission;
+    //LocationPermission permission;
 
     // Check if location services are enabled
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
@@ -75,8 +75,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   Future<void> _signUp() async {
     if (_passwordController.text != _confirmPasswordController.text) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(const SnackBar(content: Text("Passwords do not match")));
+      ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Passwords do not match")));
       return;
     }
 

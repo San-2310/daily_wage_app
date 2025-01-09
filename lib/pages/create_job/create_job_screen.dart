@@ -2,9 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:daily_wage_app/services/notification_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localization/flutter_localization.dart'; // Add this import
 import 'package:geolocator/geolocator.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:flutter_localization/flutter_localization.dart'; // Add this import
 
 import '../../localization/locales.dart'; // Add this import
 
@@ -40,13 +40,14 @@ class _CreateJobScreenState extends State<CreateJobScreen> {
 
   Future<void> _getCurrentLocation() async {
     bool serviceEnabled;
-    LocationPermission permission;
+    //LocationPermission permission;
 
     // Check if location services are enabled
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
-      ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(LocaleData.enableLocationServices.getString(context)))); // Update this line
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(LocaleData.enableLocationServices
+              .getString(context)))); // Update this line
       return;
     }
 
@@ -55,8 +56,9 @@ class _CreateJobScreenState extends State<CreateJobScreen> {
     if (status.isDenied || status.isPermanentlyDenied) {
       PermissionStatus status = await Permission.location.request();
       if (!status.isGranted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(LocaleData.locationPermissionDenied.getString(context)))); // Update this line
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text(LocaleData.locationPermissionDenied
+                .getString(context)))); // Update this line
         return;
       }
     }
@@ -107,12 +109,14 @@ class _CreateJobScreenState extends State<CreateJobScreen> {
       // Now call the notification function
       await _notificationService.notifyWorkerOfNewJobPosting(
           jobRef.id, jobTitle, jobDescription);
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text(LocaleData.jobPostedSuccessfully.getString(context)))); // Update this line
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(LocaleData.jobPostedSuccessfully
+              .getString(context)))); // Update this line
       Navigator.pop(context);
     } catch (e) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text('${LocaleData.errorPostingJob.getString(context)} $e'))); // Update this line
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(
+              '${LocaleData.errorPostingJob.getString(context)} $e'))); // Update this line
     } finally {
       setState(() {
         _isLoading = false;
@@ -137,7 +141,9 @@ class _CreateJobScreenState extends State<CreateJobScreen> {
     final theme = Theme.of(context);
 
     return Scaffold(
-      appBar: AppBar(title: Text(LocaleData.createJobListing.getString(context))), // Update this line
+      appBar: AppBar(
+          title: Text(LocaleData.createJobListing
+              .getString(context))), // Update this line
       body: SingleChildScrollView(
         child: SafeArea(
           child: Container(
@@ -149,7 +155,8 @@ class _CreateJobScreenState extends State<CreateJobScreen> {
                 TextField(
                   controller: _jobTitleController,
                   decoration: InputDecoration(
-                      labelText: LocaleData.jobTitle.getString(context), // Update this line
+                      labelText: LocaleData.jobTitle
+                          .getString(context), // Update this line
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10))),
                 ),
@@ -157,7 +164,8 @@ class _CreateJobScreenState extends State<CreateJobScreen> {
                 TextField(
                   controller: _jobDescriptionController,
                   decoration: InputDecoration(
-                      labelText: LocaleData.jobDescription.getString(context), // Update this line
+                      labelText: LocaleData.jobDescription
+                          .getString(context), // Update this line
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10))),
                 ),
@@ -166,7 +174,8 @@ class _CreateJobScreenState extends State<CreateJobScreen> {
                   controller: _numWorkersController,
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
-                      labelText: LocaleData.numWorkers.getString(context), // Update this line
+                      labelText: LocaleData.numWorkers
+                          .getString(context), // Update this line
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10))),
                 ),
@@ -175,7 +184,8 @@ class _CreateJobScreenState extends State<CreateJobScreen> {
                   controller: _wagePerDayController,
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
-                      labelText: LocaleData.wagePerDay.getString(context), // Update this line
+                      labelText: LocaleData.wagePerDay
+                          .getString(context), // Update this line
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10))),
                 ),
@@ -184,7 +194,8 @@ class _CreateJobScreenState extends State<CreateJobScreen> {
                   controller: _durationController,
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
-                      labelText: LocaleData.duration.getString(context), // Update this line
+                      labelText: LocaleData.duration
+                          .getString(context), // Update this line
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10))),
                 ),
@@ -192,20 +203,23 @@ class _CreateJobScreenState extends State<CreateJobScreen> {
                 TextField(
                   controller: _categoryController,
                   decoration: InputDecoration(
-                      labelText: LocaleData.category.getString(context), // Update this line
+                      labelText: LocaleData.category
+                          .getString(context), // Update this line
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10))),
                 ),
                 const SizedBox(height: 16),
-                Text(LocaleData.location.getString(context)), // Update this line
+                Text(
+                    LocaleData.location.getString(context)), // Update this line
                 Row(
                   children: [
                     Expanded(
                       child: TextField(
                         controller: _locationController,
                         decoration: InputDecoration(
-                            labelText:
-                                _address ?? LocaleData.enterLocation.getString(context), // Update this line
+                            labelText: _address ??
+                                LocaleData.enterLocation
+                                    .getString(context), // Update this line
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10))),
                         readOnly: true,
@@ -218,7 +232,8 @@ class _CreateJobScreenState extends State<CreateJobScreen> {
                   ],
                 ),
                 SwitchListTile(
-                  title: Text(LocaleData.useGeolocation.getString(context)), // Update this line
+                  title: Text(LocaleData.useGeolocation
+                      .getString(context)), // Update this line
                   value: _useGeolocation,
                   onChanged: (bool value) {
                     setState(() {
@@ -244,7 +259,8 @@ class _CreateJobScreenState extends State<CreateJobScreen> {
                           )
                         : Center(
                             child: Text(
-                              LocaleData.postJob.getString(context), // Update this line
+                              LocaleData.postJob
+                                  .getString(context), // Update this line
                               style: theme.textTheme.bodyLarge?.copyWith(
                                 color: theme.colorScheme.onPrimary,
                               ),

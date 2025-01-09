@@ -5,12 +5,12 @@ import 'package:daily_wage_app/pages/auth/login_screen.dart';
 import 'package:daily_wage_app/services/auth_services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localization/flutter_localization.dart'; // Add this import
 import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter_localization/flutter_localization.dart'; // Add this import
 
 import '../../localization/locales.dart'; // Add this import
 
@@ -45,7 +45,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   final FocusNode _nameFocusNode = FocusNode();
   final FocusNode _emailFocusNode = FocusNode();
   final FocusNode _phoneFocusNode = FocusNode();
-  final FocusNode _locationFocusNode = FocusNode();
+  //final FocusNode _locationFocusNode = FocusNode();
   final FocusNode _roleFocusNode = FocusNode();
 
   @override
@@ -108,13 +108,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
   // Get current location using geolocator
   Future<void> _getCurrentLocation() async {
     bool serviceEnabled;
-    LocationPermission permission;
+    //LocationPermission permission;
 
     // Check if location services are enabled
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
-      ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(LocaleData.enableLocationServices.getString(context)))); // Update this line
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(LocaleData.enableLocationServices
+              .getString(context)))); // Update this line
       return;
     }
 
@@ -123,8 +124,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
     if (status.isDenied || status.isPermanentlyDenied) {
       PermissionStatus status = await Permission.location.request();
       if (!status.isGranted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(LocaleData.locationPermissionDenied.getString(context)))); // Update this line
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text(LocaleData.locationPermissionDenied
+                .getString(context)))); // Update this line
         return;
       }
     }
@@ -150,18 +152,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
       });
 
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(LocaleData.profileUpdatedSuccessfully.getString(context))), // Update this line
+        SnackBar(
+            content: Text(LocaleData.profileUpdatedSuccessfully
+                .getString(context))), // Update this line
       );
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('${LocaleData.failedToUpdateProfile.getString(context)} $e')), // Update this line
+        SnackBar(
+            content: Text(
+                '${LocaleData.failedToUpdateProfile.getString(context)} $e')), // Update this line
       );
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
+    //final theme = Theme.of(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -190,20 +196,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
               const SizedBox(height: 20),
-              _buildEditableField(LocaleData.name.getString(context), _nameController, _nameFocusNode), // Update this line
+              _buildEditableField(LocaleData.name.getString(context),
+                  _nameController, _nameFocusNode), // Update this line
               const SizedBox(height: 15),
-              _buildUneditableField(LocaleData.email.getString(context), _emailController, _emailFocusNode), // Update this line
+              _buildUneditableField(LocaleData.email.getString(context),
+                  _emailController, _emailFocusNode), // Update this line
               const SizedBox(height: 15),
-              _buildEditableField(LocaleData.phone.getString(context), _phoneController, _phoneFocusNode), // Update this line
+              _buildEditableField(LocaleData.phone.getString(context),
+                  _phoneController, _phoneFocusNode), // Update this line
               const SizedBox(height: 15),
               _buildLocationField(),
               const SizedBox(height: 15),
-              _buildUneditableField(LocaleData.role.getString(context), // Update this line
-                  TextEditingController()..text = _role, _roleFocusNode),
+              _buildUneditableField(
+                  LocaleData.role.getString(context), // Update this line
+                  TextEditingController()..text = _role,
+                  _roleFocusNode),
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: _saveProfile,
-                child: Text(LocaleData.saveChanges.getString(context)), // Update this line
+                child: Text(LocaleData.saveChanges
+                    .getString(context)), // Update this line
               ),
             ],
           ),
@@ -275,12 +287,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(LocaleData.location.getString(context), style: const TextStyle(fontWeight: FontWeight.bold)), // Update this line
+        Text(LocaleData.location.getString(context),
+            style: const TextStyle(
+                fontWeight: FontWeight.bold)), // Update this line
         Row(
           children: [
             Expanded(
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   border: Border.all(color: Colors.grey.shade300),
@@ -288,7 +303,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 child: TextField(
                   controller: _locationController,
                   decoration: InputDecoration(
-                    hintText: LocaleData.enterLocationOrUseGeolocation.getString(context), // Update this line
+                    hintText: LocaleData.enterLocationOrUseGeolocation
+                        .getString(context), // Update this line
                     border: InputBorder.none,
                   ),
                 ),
@@ -301,7 +317,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ],
         ),
         SwitchListTile(
-          title: Text(LocaleData.useGeolocation.getString(context)), // Update this line
+          title: Text(
+              LocaleData.useGeolocation.getString(context)), // Update this line
           value: _useGeolocation,
           onChanged: (bool value) {
             setState(() {
